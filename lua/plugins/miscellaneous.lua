@@ -1,7 +1,7 @@
 return {
-    {'tpope/vim-sleuth',}, -- Detect tabstop and shiftwidth automatically
-    { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
-    { -- Autoformat
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
+  { -- Autoformat
     'stevearc/conform.nvim',
     opts = {
       notify_on_error = false,
@@ -22,5 +22,11 @@ return {
   },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    opts = {},
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+  },
 }

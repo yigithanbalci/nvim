@@ -22,6 +22,8 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+-- NOTE: syncing the system clipboard and buffers seem pretty nice
+-- but it also affects system clipboard from buffers too.
 vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
@@ -97,8 +99,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- keys to move selection up and down
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection downwards'})
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection upwards'})
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection downwards' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection upwards' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -113,4 +115,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
