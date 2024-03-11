@@ -22,6 +22,7 @@ return { -- Autoformat
       -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'black' },
       go = { 'goimports', 'gofmt' },
+      kotlin = { 'ktlint' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
@@ -42,6 +43,7 @@ return { -- Autoformat
       typescriptreact = { 'eslint_d' },
       python = { 'pylint' },
       go = { 'golangcilint' },
+      kotlin = { 'ktlint' },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })

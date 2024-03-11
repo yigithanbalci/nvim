@@ -146,6 +146,7 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+      kotlin_language_server = {},
       -- pyright = {},
       -- rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -203,10 +204,12 @@ return { -- LSP Configuration & Plugins
       'prettier',
       'isort',
       'black',
+      'ktlint',
     })
     vim.list_extend(ensure_installed, {
       'eslint_d',
       'pylint',
+      'ktlint',
     })
 
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
