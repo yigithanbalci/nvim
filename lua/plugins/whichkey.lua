@@ -13,7 +13,7 @@ return { -- Useful plugin to show you pending keybinds.
       ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
       ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore', d = { name = '[D]ocument' }, w = { name = '[W]orksapce' }, c = { name = '[C]ode' } },
-      ['<leader>D'] = { name = '[D]ebug', _ = 'which_key_ignore', g = { name = '[G]o' } },
+      ['<leader>D'] = { name = '[D]ebug', _ = 'which_key_ignore', g = { name = '[G]o' }, u = { name = '[U]I' } },
       ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore', s = { name = '[G]it[S]igns' } },
     }
   end,

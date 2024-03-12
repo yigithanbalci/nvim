@@ -65,6 +65,8 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    vim.keymap.set('n', '<leader>Duo', dapui.open, { desc = 'Dapui: [O]pen' })
+    vim.keymap.set('n', '<leader>Duc', dapui.close, { desc = 'Dapui: [C]lose' })
     require('dapui').setup()
     require('dap-go').setup()
   end,
