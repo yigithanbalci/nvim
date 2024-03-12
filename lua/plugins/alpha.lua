@@ -3,6 +3,7 @@ return {
   -- event = 'VeryLazy', -- load plugin after all configuration is set
   dependencies = {
     'nvim-tree/nvim-web-devicons',
+    'rmagatti/auto-session',
   },
 
   config = function()
