@@ -316,7 +316,7 @@ return {
 
     vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
     vim.keymap.set('n', '\\', ':Neotree filesystem reveal left<CR>', {})
-    vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left<CR>', {})
-    vim.keymap.set('n', '<leader>bf', ':Neotree buffers reveal float<CR>', {})
+    vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left<CR>', { desc = 'Neotree Reveal' })
+    vim.keymap.set('n', '<leader>sbf', ':Neotree buffers reveal float<CR>', { desc = 'Neotree [B]uffers [F]loat' })
   end,
 }
