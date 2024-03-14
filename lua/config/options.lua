@@ -103,3 +103,7 @@ vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- keys to move selection up and down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection downwards" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection upwards" })

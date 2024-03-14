@@ -15,6 +15,13 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
+    { import = "lazyvim.plugins.extras.editor.harpoon2" },
+    { import = "lazyvim.plugins.extras.dap.core" },
+    { import = "lazyvim.plugins.extras.dap.nlua" },
+    { import = "lazyvim.plugins.extras.test.core" },
+
+    --NOTE: Language specific plugins
+    { import = "lazyvim.plugins.extras.lang.go" },
     { import = "plugins" },
   },
   defaults = {
