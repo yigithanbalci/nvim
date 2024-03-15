@@ -1,36 +1,77 @@
 return {
-  'ThePrimeagen/harpoon',
-  global_settings = {
-    -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
-    save_on_toggle = false,
-
-    -- saves the harpoon file upon every change. disabling is unrecommended.
-    save_on_change = true,
-
-    -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
-    enter_on_sendcmd = false,
-
-    -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
-    tmux_autoclose_windows = false,
-
-    -- filetypes that you want to prevent from adding to the harpoon list menu.
-    excluded_filetypes = { 'harpoon' },
-
-    -- set marks specific to each git branch inside git repository
-    -- Each branch will have it's own set of marked files
-    mark_branch = true,
-
-    -- enable tabline with harpoon marks
-    tabline = false,
-    tabline_prefix = '   ',
-    tabline_suffix = '   ',
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+    },
+    keys = {
+      {
+        "<leader>hm",
+        function()
+          require("harpoon"):list():append()
+        end,
+        desc = "Harpoon file",
+      },
+      {
+        "<leader>hh",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon quick menu",
+      },
+      {
+        "<leader>h1",
+        function()
+          require("harpoon"):list():select(1)
+        end,
+        desc = "Harpoon to file 1",
+      },
+      {
+        "<leader>h2",
+        function()
+          require("harpoon"):list():select(2)
+        end,
+        desc = "Harpoon to file 2",
+      },
+      {
+        "<leader>h3",
+        function()
+          require("harpoon"):list():select(3)
+        end,
+        desc = "Harpoon to file 3",
+      },
+      {
+        "<leader>H",
+        false,
+      },
+      {
+        "<leader>h",
+        false,
+      },
+      {
+        "<leader>1",
+        false,
+      },
+      {
+        "<leader>2",
+        false,
+      },
+      {
+        "<leader>3",
+        false,
+      },
+      {
+        "<leader>4",
+        false,
+      },
+      {
+        "<leader>5",
+        false,
+      },
+    },
   },
-  config = function()
-    vim.keymap.set('n', '<leader>hx', function()
-      require('harpoon.mark').add_file()
-    end, { desc = 'Mark File Harpoon' })
-    vim.keymap.set('n', '<leader>hp', "<cmd>lua require'harpoon.ui'.nav_prev{}<CR>", { desc = 'Prev File Harpoon' })
-    vim.keymap.set('n', '<leader>hn', "<cmd>lua require'harpoon.ui'.nav_next{}<CR>", { desc = 'Next File Harpoon' })
-    vim.keymap.set('n', '<leader>hm', '<cmd>:Telescope harpoon marks<CR>', { desc = 'Search File Harpoon' })
-  end,
 }
