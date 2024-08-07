@@ -3,7 +3,7 @@ return {
     "folke/which-key.nvim",
     opts = {
       plugins = { spelling = true },
-      defaults = {
+      spec = {
         ["<leader>h"] = { name = "+harpoon" },
       },
     },

@@ -17,6 +17,7 @@ return {
         fish = { "fish_indent" },
         sh = { "shfmt" },
         go = { "goimports", "gofmt" },
+        typescript = { "prettier" },
       },
     },
   },
@@ -26,6 +27,7 @@ return {
       linters_by_ft = {
         fish = { "fish" },
         go = { "golangcilint" },
+        typescript = { "eslint" },
       },
       linters = {},
     },
