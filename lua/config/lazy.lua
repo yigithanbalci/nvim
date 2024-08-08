@@ -28,6 +28,9 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
 
     --NOTE: Language specific plugins
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.clangd" },
+    { import = "lazyvim.plugins.extras.lang.cmake" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.ansible" },
     { import = "lazyvim.plugins.extras.lang.docker" },
