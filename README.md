@@ -5,3 +5,4 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 
 TODO: update dadbod ui settings, especially tree
 TODO: fix git-worktree plugin
+TODO: fix neotest debug for jest
