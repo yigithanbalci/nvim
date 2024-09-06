@@ -24,8 +24,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.test.core" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
-
-    --NOTE: Language specific plugins
     { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -36,6 +34,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.terraform" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
+    -- import/override with your plugins
     { import = "plugins" },
   },
   defaults = {
@@ -44,11 +43,14 @@ require("lazy").setup({
     lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
-    version = true, -- (not) always use the latest git commit
+    version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax", "catppuccin", "gruvbox", "gruvbox-material" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  checker = {
+    enabled = true, -- check for plugin updates periodically
+    notify = false, -- notify on update
+  }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
