@@ -19,6 +19,7 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "ocaml",
         "python",
         "query",
         "regex",

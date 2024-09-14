@@ -18,6 +18,7 @@ return {
         sh = { "shfmt" },
         go = { "goimports", "gofmt" },
         typescript = { "prettier" },
+        ocaml = { "ocamlformat " },
       },
     },
   },
