@@ -3,8 +3,6 @@ return {
     "mbbill/undotree",
     name = "undotree",
     config = function(_, opts)
-      vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
-
       -- Check if persistent undo is supported
       if vim.fn.has("persistent_undo") == 1 then
         -- Expand the path to resolve the home directory
@@ -23,6 +21,16 @@ return {
         -- Enable undo file
         vim.o.undofile = true
       end
+      return opts
     end,
+    keys = {
+      {
+        "<leader>U",
+        function()
+          vim.cmd.UndotreeToggle()
+        end,
+        desc = "+undotree",
+      },
+    },
   },
 }
