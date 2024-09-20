@@ -23,6 +23,8 @@ return {
         "python",
         "query",
         "regex",
+        "rust",
+        "ron",
         "toml",
         "tsx",
         "typescript",

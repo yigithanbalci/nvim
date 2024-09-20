@@ -4,8 +4,19 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
+      {
+        "Saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        opts = {
+          completion = {
+            cmp = { enabled = true },
+          },
+        },
+      },
     },
     opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, { name = "crates" })
       opts.snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)

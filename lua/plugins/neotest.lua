@@ -11,6 +11,7 @@ return {
         jestCommand = "npm test --",
         JestConfigFile = "custom.jest.config.ts",
       },
+      ["rustaceanvim.neotest"] = {},
     },
     -- Example for loading neotest-golang with a custom config
     -- adapters = {

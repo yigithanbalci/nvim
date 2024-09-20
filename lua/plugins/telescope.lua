@@ -13,6 +13,6 @@ return {
   },
   keys = {
     { "<leader><space>", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-    { "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
+    { "<leader>sp", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
   },
 }
