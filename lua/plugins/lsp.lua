@@ -6,6 +6,7 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
+        marksman = {},
         taplo = {
           keys = {
             {

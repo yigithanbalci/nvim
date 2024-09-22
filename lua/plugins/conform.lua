@@ -19,6 +19,8 @@ return {
         go = { "goimports", "gofmt" },
         typescript = { "prettier" },
         ocaml = { "ocamlformat " },
+        markdown = { "prettier", "markdown-cli2", "markdown-toc" },
+        ["markdown.mdx"] = { "prettier", "markdown-cli2", "markdown-toc" },
       },
     },
   },

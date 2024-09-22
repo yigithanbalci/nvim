@@ -8,6 +8,8 @@ return {
       "codelldb",
       "rust-analyzer",
       "rustfmt",
+      "markdownlint-cli2",
+      "markdown-toc",
     },
   },
 }
