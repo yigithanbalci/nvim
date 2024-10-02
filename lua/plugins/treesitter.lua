@@ -27,8 +27,10 @@ return {
         "python",
         "query",
         "regex",
+        -- Rust Tools
         "rust",
         "ron",
+        -------------
         "toml",
         "tsx",
         "typescript",
