@@ -7,8 +7,12 @@ return {
         "c",
         "cpp",
         "diff",
+        -- Go Tools
         "go",
         "gomod",
+        "gowork",
+        "gosum",
+        -----------
         "html",
         "javascript",
         "jsdoc",

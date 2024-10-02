@@ -10,6 +10,13 @@ return {
       "rustfmt",
       "markdownlint-cli2",
       "markdown-toc",
+      -- Go tools
+      "goimports",
+      "gofumpt",
+      "gomodifytags",
+      "impl",
+      "delve",
+      -----------
     },
   },
 }

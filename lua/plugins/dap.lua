@@ -12,6 +12,7 @@ return {
   },
       opts = {},
     },
+    "leoluz/nvim-dap-go",
   },
   opts = function(_, opts)
     local dap = require("dap")
