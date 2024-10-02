@@ -1,6 +1,6 @@
 return {
   "nvim-neotest/neotest",
-  dependencies = { "nvim-neotest/nvim-nio", "nvim-neotest/neotest-jest" },
+  dependencies = { "nvim-neotest/nvim-nio", "nvim-neotest/neotest-jest", "fredrikaverpil/neotest-golang" },
   opts = {
     -- Can be a list of adapters like what neotest expects,
     -- or a list of adapter names,
@@ -12,6 +12,9 @@ return {
         JestConfigFile = "custom.jest.config.ts",
       },
       ["rustaceanvim.neotest"] = {},
+      ["neotest-golang"] = {
+        dap_go_enabled = true,
+      },
     },
     -- Example for loading neotest-golang with a custom config
     -- adapters = {

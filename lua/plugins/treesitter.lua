@@ -7,8 +7,12 @@ return {
         "c",
         "cpp",
         "diff",
+        -- Go Tools
         "go",
         "gomod",
+        "gowork",
+        "gosum",
+        -----------
         "html",
         "javascript",
         "jsdoc",
@@ -23,8 +27,10 @@ return {
         "python",
         "query",
         "regex",
+        -- Rust Tools
         "rust",
         "ron",
+        -------------
         "toml",
         "tsx",
         "typescript",
