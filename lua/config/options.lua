@@ -62,6 +62,7 @@ opt.autowrite = true -- Enable auto write
 --NOTE: not convenient to use clipboard there are already some mappings to do same thing
 --without overriding default behavior
 --opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+opt.clipboard = ""
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
