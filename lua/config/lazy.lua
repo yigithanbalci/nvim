@@ -1,3 +1,7 @@
+--TODO: update dadbod ui settings, especially tree
+--TODO: fix git-worktree plugin
+--TODO: fix neotest debug for jest
+--TODO: refactor dir & structure
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -35,8 +39,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.terraform" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
     -- import/override with your plugins
     { import = "plugins" },
   },
