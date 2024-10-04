@@ -17,6 +17,7 @@ return {
     opts = function(_, opts)
       opts.sources = opts.sources or {}
       table.insert(opts.sources, { name = "crates" })
+      table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
       opts.snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
