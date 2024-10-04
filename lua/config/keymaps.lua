@@ -198,6 +198,8 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
+--NOTE: Below mappings are custom not from lazyvim ---------------------------------------------
+
 -- better tricks navigation etc 
 map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the register with deleted"})
 map("n", "<C-u>", "<C-u>zz", { desc = "Navigate up half a page and center page"})
