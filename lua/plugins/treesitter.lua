@@ -17,6 +17,9 @@ return {
         "gosum",
         -----------
         "html",
+        -- Java Tools
+        "java",
+        -----------
         "javascript",
         "jsdoc",
         "json",
