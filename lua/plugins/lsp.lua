@@ -6,6 +6,8 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
+        -- Java
+        jdtls = {},
         -- Clangd
         clangd = {
           keys = {
