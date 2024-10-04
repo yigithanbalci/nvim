@@ -18,7 +18,7 @@ return {
         -----------
         "html",
         -- Java Tools
-        "java",
+        --"java",
         -----------
         "javascript",
         "jsdoc",
