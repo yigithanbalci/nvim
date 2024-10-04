@@ -11,5 +11,16 @@
         "enabled": true
       }
     }
+  },
+  "lspconfig": {
+    "jdtls": {
+      "java.configuration.runtimes": [
+        {
+          "name": "JavaSE-21",
+          "path": "/opt/homebrew/Cellar/openjdk/23/libexec/openjdk.jdk/Contents/Home (no JDK specified, using current Java home)",
+          "default": true
+        }
+      ]
+    }
   }
 }
