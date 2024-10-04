@@ -3,20 +3,24 @@ return {
   opts_extend = { "ensure_installed" },
   opts = {
     ensure_installed = {
-      -- C/C++ tools
+      -- C/C++ Tools
       "cmakelang",
       "cmakelint",
       ----------------
       "js-debug-adapter",
       "ocamlearlybird",
-      -- Rust tools
+      -- Rust Tools
       "codelldb", -- also needed for clangd
       "rust-analyzer",
       "rustfmt",
       ----------------
+      -- Java Tools
+      "java-debug-adapter",
+      "java-test",
+      --
       "markdownlint-cli2",
       "markdown-toc",
-      -- Go tools
+      -- Go Tools
       "goimports",
       "gofumpt",
       "gomodifytags",
