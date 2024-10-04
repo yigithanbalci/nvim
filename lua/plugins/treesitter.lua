@@ -4,8 +4,11 @@ return {
     opts = {
       ensure_installed = {
         "bash",
+        -- C/C++ Tools
         "c",
         "cpp",
+        "cmake",
+        -----------
         "diff",
         -- Go Tools
         "go",
