@@ -15,8 +15,8 @@ return {
       "rustfmt",
       ----------------
       -- Java Tools
-      "java-debug-adapter",
-      "java-test",
+      --"java-debug-adapter",
+      --"java-test",
       --
       "markdownlint-cli2",
       "markdown-toc",
