@@ -45,6 +45,7 @@ return {
 
         -- CMake
         neocmake = {},
+        -- Go Tools
         gopls = {
           settings = {
             gopls = {
@@ -83,7 +84,9 @@ return {
             },
           },
         },
+        -------------
         marksman = {},
+        -- Rust Tools
         taplo = {
           keys = {
             {
@@ -99,6 +102,7 @@ return {
             },
           },
         },
+        -------------
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
           -- Use this to add any additional keymaps
@@ -255,6 +259,7 @@ return {
           require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
           return false
         end,
+        -- Go Tools
         gopls = function(_, opts)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
@@ -273,6 +278,7 @@ return {
           end, "gopls")
           -- end workaround
         end,
+        ------------------
         tsserver = function()
           -- disable tsserver
           return true
