@@ -11,8 +11,8 @@ return {
       "ocamlearlybird",
       -- Rust Tools
       "codelldb", -- also needed for clangd
-      "rust-analyzer",
-      "rustfmt",
+      -- "rust-analyzer",
+      -- "rustfmt",
       ----------------
       -- Java Tools
       --"java-debug-adapter",

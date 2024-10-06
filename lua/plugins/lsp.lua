@@ -1,153 +1,142 @@
 --NOTE: double tap diagnostic hover (K) to enter the opened popup
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      -- LSP Server Settings
-      ---@type lspconfig.options
-      servers = {
-        -- Clangd
-        clangd = {
-          keys = {
-            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-          },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja"
-            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-              fname
-            ) or require("lspconfig.util").find_git_ancestor(fname)
-          end,
-          capabilities = {
-            offsetEncoding = { "utf-16" },
-          },
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-          },
-          init_options = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            clangdFileStatus = true,
-          },
+  "neovim/nvim-lspconfig",
+  opts = {
+    -- LSP Server Settings
+    ---@type lspconfig.options
+    servers = {
+      -- Clangd
+      clangd = {
+        keys = {
+          { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
         },
-
-        -- CMake
-        neocmake = {},
-        gopls = {
-          settings = {
-            gopls = {
-              gofumpt = true,
-              codelenses = {
-                gc_details = false,
-                generate = true,
-                regenerate_cgo = true,
-                run_govulncheck = true,
-                test = true,
-                tidy = true,
-                upgrade_dependency = true,
-                vendor = true,
-              },
-              hints = {
-                assignVariableTypes = true,
-                compositeLiteralFields = true,
-                compositeLiteralTypes = true,
-                constantValues = true,
-                functionTypeParameters = true,
-                parameterNames = true,
-                rangeVariableTypes = true,
-              },
-              analyses = {
-                fieldalignment = true,
-                nilness = true,
-                unusedparams = true,
-                unusedwrite = true,
-                useany = true,
-              },
-              usePlaceholders = true,
-              completeUnimported = true,
-              staticcheck = true,
-              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-              semanticTokens = true,
-            },
-          },
+        root_dir = function(fname)
+          return require("lspconfig.util").root_pattern(
+            "Makefile",
+            "configure.ac",
+            "configure.in",
+            "config.h.in",
+            "meson.build",
+            "meson_options.txt",
+            "build.ninja"
+          )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+            fname
+          ) or require("lspconfig.util").find_git_ancestor(fname)
+        end,
+        capabilities = {
+          offsetEncoding = { "utf-16" },
         },
-        marksman = {},
-        taplo = {
-          keys = {
-            {
-              "K",
-              function()
-                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-                  require("crates").show_popup()
-                else
-                  vim.lsp.buf.hover()
-                end
-              end,
-              desc = "Show Crate Documentation",
-            },
-          },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
         },
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          -- Use this to add any additional keymaps
-          -- for specific lsp servers
-          ---@type LazyKeysSpec[]
-          -- keys = {},
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              codeLens = {
-                enable = true,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        },
-        eslint = {
-          settings = {
-            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectories = { mode = "auto" },
-          },
-        },
-        ocamllsp = {
-          filetypes = {
-            "ocaml",
-            "ocaml.menhir",
-            "ocaml.interface",
-            "ocaml.ocamllex",
-            "reason",
-            "dune",
-          },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "*.opam",
-              "esy.json",
-              "package.json",
-              ".git",
-              "dune-project",
-              "dune-workspace",
-              "*.ml"
-            )(fname)
-          end,
+        init_options = {
+          usePlaceholders = true,
+          completeUnimported = true,
+          clangdFileStatus = true,
         },
       },
+
+      -- CMake
+      neocmake = {},
+      -- Go Tools
+      gopls = {
+        settings = {
+          gopls = {
+            gofumpt = true,
+            codelenses = {
+              gc_details = false,
+              generate = true,
+              regenerate_cgo = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              fieldalignment = true,
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+            usePlaceholders = true,
+            completeUnimported = true,
+            staticcheck = true,
+            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+            semanticTokens = true,
+          },
+        },
+      },
+      -------------
+      marksman = {},
+      -- Rust Tools
+      -- taplo = {
+      --   keys = {
+      --     {
+      --       "K",
+      --       function()
+      --         if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+      --           require("crates").show_popup()
+      --         else
+      --           vim.lsp.buf.hover()
+      --         end
+      --       end,
+      --       desc = "Show Crate Documentation",
+      --     },
+      --   },
+      -- },
+      -------------
+      --Lua Tools
+      lua_ls = {
+        -- mason = false, -- set to false if you don't want this server to be installed with mason
+        -- Use this to add any additional keymaps
+        -- for specific lsp servers
+        ---@type LazyKeysSpec[]
+        -- keys = {},
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            codeLens = {
+              enable = true,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      },
+      -------------
+      eslint = {
+        settings = {
+          -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+          workingDirectories = { mode = "auto" },
+        },
+      },
+      -- TypeScript Tools
+      --- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
+      --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
       tsserver = {
+        enabled = false,
+      },
+      ts_ls = {
         enabled = false,
       },
       vtsls = {
@@ -190,6 +179,7 @@ return {
             },
           },
         },
+
         keys = {
           {
             "gD",
@@ -242,97 +232,108 @@ return {
             desc = "Select TS workspace version",
           },
         },
+        ----------------------
       },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        jdtls = function()
-          return true -- avoid duplicate servers
-        end,
-        clangd = function(_, opts)
-          local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
-          require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
-          return false
-        end,
-        gopls = function(_, opts)
-          -- workaround for gopls not supporting semanticTokensProvider
-          -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-          LazyVim.lsp.on_attach(function(client, _)
-            if not client.server_capabilities.semanticTokensProvider then
-              local semantic = client.config.capabilities.textDocument.semanticTokens
-              client.server_capabilities.semanticTokensProvider = {
-                full = true,
-                legend = {
-                  tokenTypes = semantic.tokenTypes,
-                  tokenModifiers = semantic.tokenModifiers,
-                },
-                range = true,
-              }
-            end
-          end, "gopls")
-          -- end workaround
-        end,
-        tsserver = function()
-          -- disable tsserver
-          return true
-        end,
-        vtsls = function(_, opts)
-          LazyVim.lsp.on_attach(function(client, buffer)
-            client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
-              ---@type string, string, lsp.Range
-              local action, uri, range = unpack(command.arguments)
+    },
+    -- you can do any additional lsp server setup here
+    -- return true if you don't want this server to be setup with lspconfig
+    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+    setup = {
+      jdtls = function()
+        return true -- avoid duplicate servers
+      end,
+      clangd = function(_, opts)
+        local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
+        require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
+        return false
+      end,
+      -- Go Tools
+      gopls = function(_, opts)
+        -- workaround for gopls not supporting semanticTokensProvider
+        -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
+        LazyVim.lsp.on_attach(function(client, _)
+          if not client.server_capabilities.semanticTokensProvider then
+            local semantic = client.config.capabilities.textDocument.semanticTokens
+            client.server_capabilities.semanticTokensProvider = {
+              full = true,
+              legend = {
+                tokenTypes = semantic.tokenTypes,
+                tokenModifiers = semantic.tokenModifiers,
+              },
+              range = true,
+            }
+          end
+        end, "gopls")
+        -- end workaround
+      end,
+      ------------------
+      -- TypeScript
+      --- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
+      --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
+      tsserver = function()
+        -- disable tsserver
+        return true
+      end,
+      ts_ls = function()
+        -- disable tsserver
+        return true
+      end,
+      vtsls = function(_, opts)
+        LazyVim.lsp.on_attach(function(client, buffer)
+          client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
+            ---@type string, string, lsp.Range
+            local action, uri, range = unpack(command.arguments)
 
-              local function move(newf)
-                client.request("workspace/executeCommand", {
-                  command = command.command,
-                  arguments = { action, uri, range, newf },
-                })
-              end
-
-              local fname = vim.uri_to_fname(uri)
+            local function move(newf)
               client.request("workspace/executeCommand", {
-                command = "typescript.tsserverRequest",
-                arguments = {
-                  "getMoveToRefactoringFileSuggestions",
-                  {
-                    file = fname,
-                    startLine = range.start.line + 1,
-                    startOffset = range.start.character + 1,
-                    endLine = range["end"].line + 1,
-                    endOffset = range["end"].character + 1,
-                  },
-                },
-              }, function(_, result)
-                ---@type string[]
-                local files = result.body.files
-                table.insert(files, 1, "Enter new path...")
-                vim.ui.select(files, {
-                  prompt = "Select move destination:",
-                  format_item = function(f)
-                    return vim.fn.fnamemodify(f, ":~:.")
-                  end,
-                }, function(f)
-                  if f and f:find("^Enter new path") then
-                    vim.ui.input({
-                      prompt = "Enter move destination:",
-                      default = vim.fn.fnamemodify(fname, ":h") .. "/",
-                      completion = "file",
-                    }, function(newf)
-                      return newf and move(newf)
-                    end)
-                  elseif f then
-                    move(f)
-                  end
-                end)
-              end)
+                command = command.command,
+                arguments = { action, uri, range, newf },
+              })
             end
-          end, "vtsls")
-          -- copy typescript settings to javascript
-          opts.settings.javascript =
-            vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
-        end,
-      },
+
+            local fname = vim.uri_to_fname(uri)
+            client.request("workspace/executeCommand", {
+              command = "typescript.tsserverRequest",
+              arguments = {
+                "getMoveToRefactoringFileSuggestions",
+                {
+                  file = fname,
+                  startLine = range.start.line + 1,
+                  startOffset = range.start.character + 1,
+                  endLine = range["end"].line + 1,
+                  endOffset = range["end"].character + 1,
+                },
+              },
+            }, function(_, result)
+              ---@type string[]
+              local files = result.body.files
+              table.insert(files, 1, "Enter new path...")
+              vim.ui.select(files, {
+                prompt = "Select move destination:",
+                format_item = function(f)
+                  return vim.fn.fnamemodify(f, ":~:.")
+                end,
+              }, function(f)
+                if f and f:find("^Enter new path") then
+                  vim.ui.input({
+                    prompt = "Enter move destination:",
+                    default = vim.fn.fnamemodify(fname, ":h") .. "/",
+                    completion = "file",
+                  }, function(newf)
+                    return newf and move(newf)
+                  end)
+                elseif f then
+                  move(f)
+                end
+              end)
+            end)
+          end
+        end, "vtsls")
+        -- copy typescript settings to javascript
+        opts.settings.javascript =
+          vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
+      end,
+      -----------------------------------------------
       eslint = function()
         local function get_client(buf)
           return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
