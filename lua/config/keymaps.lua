@@ -43,7 +43,12 @@ map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bd", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+map("n", "<leader>bd", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function()
+  Snacks.bufdelete.other()
+end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search with <esc>
@@ -121,37 +126,34 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- stylua: ignore start
 
 -- toggle options
-LazyVim.toggle.map("<leader>uf", LazyVim.toggle.format())
-LazyVim.toggle.map("<leader>uF", LazyVim.toggle.format(true))
-LazyVim.toggle.map("<leader>us", LazyVim.toggle("spell", { name = "Spelling" }))
-LazyVim.toggle.map("<leader>uw", LazyVim.toggle("wrap", { name = "Wrap" }))
-LazyVim.toggle.map("<leader>uL", LazyVim.toggle("relativenumber", { name = "Relative Number" }))
-LazyVim.toggle.map("<leader>ud", LazyVim.toggle.diagnostics)
-LazyVim.toggle.map("<leader>ul", LazyVim.toggle.number)
-LazyVim.toggle.map( "<leader>uc", LazyVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
-LazyVim.toggle.map("<leader>uT", LazyVim.toggle.treesitter)
-LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
+LazyVim.format.snacks_toggle():map("<leader>uf")
+LazyVim.format.snacks_toggle(true):map("<leader>uF")
+
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
+"<leader>uc")
+
+Snacks.toggle.treesitter():map("<leader>uT")
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 if vim.lsp.inlay_hint then
-  LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
+  Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
 -- lazygit
-map("n", "<leader>gg", function() LazyVim.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gG", function() LazyVim.lazygit() end, { desc = "Lazygit (cwd)" })
-map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
-map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
+if vim.fn.executable("lazygit") == 1 then
+  map("n", "<leader>gg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 
-map("n", "<leader>gf", function()
-  local git_path = vim.api.nvim_buf_get_name(0)
-  LazyVim.lazygit({args = { "-f", vim.trim(git_path) }})
-end, { desc = "Lazygit Current File History" })
-
-map("n", "<leader>gl", function()
-  LazyVim.lazygit({ args = { "log" }, cwd = LazyVim.root.git() })
-end, { desc = "Lazygit Log" })
-map("n", "<leader>gL", function()
-  LazyVim.lazygit({ args = { "log" } })
-end, { desc = "Lazygit Log (cwd)" })
+  map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+  map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
+  map("n", "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
+  map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
+  map("n", "<leader>gl", function() Snacks.lazygit.log({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit Log" })
+  map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
+end
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
@@ -200,12 +202,12 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 --NOTE: Below mappings are custom not from lazyvim ---------------------------------------------
 
--- better tricks navigation etc 
-map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the register with deleted"})
-map("n", "<C-u>", "<C-u>zz", { desc = "Navigate up half a page and center page"})
-map("n", "<C-d>", "<C-d>zz", { desc = "Navigate down half a page and center page"})
-map("n", "n", "nzzzv", { desc = "Navigate next and center the page"})
-map("n", "N", "Nzzzv", { desc = "Navigate previous and center the page"})
+-- better tricks navigation etc
+map("x", "<leader>p", "\"_dP", { desc = "Paste without replacing the register with deleted" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Navigate up half a page and center page" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Navigate down half a page and center page" })
+map("n", "n", "nzzzv", { desc = "Navigate next and center the page" })
+map("n", "N", "Nzzzv", { desc = "Navigate previous and center the page" })
 --map("n", "<S-h>", '<Cmd>execute "normal! H"<CR>', { desc = "Make default H movement"})
 --map("n", "<S-l>", '<Cmd>execute "normal! L"<CR>', { desc = "Make default H movement"})
 map("i", "jj", "<esc>")
@@ -229,7 +231,7 @@ map("v", "cY", '"+Y', { desc = "Yank System Clipboard" })
 map("n", "cP", '"+P', { desc = "Paste System Clipboard" })
 map("v", "cP", '"+P', { desc = "Paste System Clipboard" })
 
---keys to resize window 
+--keys to resize window
 map("n", "<C-Left>", '<cmd>:vertical resize -5<CR>', { desc = "Vertical resize window(-)" })
 map("n", "<C-Right>", ':vertical resize +5<CR>', { desc = "Vertical resize window(+)" })
 map("n", "<C-Up>", ':horizontal resize +2<CR>', { desc = "Horizontal resize window(+)" })
