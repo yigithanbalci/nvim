@@ -1,5 +1,6 @@
 local Util = require("lazyvim.util")
 return {
+  { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
   {
     "rmagatti/auto-session",
     config = function()
@@ -30,35 +31,36 @@ return {
     event = "VimEnter",
     dependencies = {
       "rmagatti/auto-session",
+      "nvim-tree/nvim-web-devicons",
     },
     opts = function(_, opts)
       opts.config.center = {
         {
-          action = LazyVim.pick("files"),
-          desc = " Find file",
+          action = "lua LazyVim.pick()()",
+          desc = " Find File",
           icon = " ",
           key = "f",
         },
         {
           action = "ene | startinsert",
-          desc = " New file",
+          desc = " New File",
           icon = " ",
           key = "n",
         },
         {
-          action = "Telescope oldfiles",
-          desc = " Recent files",
+          action = 'lua LazyVim.pick("oldfiles")()',
+          desc = " Recent Files",
           icon = " ",
           key = "r",
         },
         {
-          action = "Telescope live_grep",
-          desc = " Find text",
+          action = 'lua LazyVim.pick("live_grep")()',
+          desc = " Find Text",
           icon = " ",
           key = "g",
         },
         {
-          action = [[lua require("lazyvim.util").telescope.config_files()()]],
+          action = "lua LazyVim.pick.config_files()()",
           desc = " Config",
           icon = " ",
           key = "c",
@@ -88,12 +90,15 @@ return {
           key = "l",
         },
         {
-          action = "qa",
+          action = function()
+            vim.api.nvim_input("<cmd>qa<cr>")
+          end,
           desc = " Quit",
           icon = " ",
           key = "q",
         },
       }
+      return opts
     end,
   },
 }
