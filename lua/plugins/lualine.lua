@@ -1,5 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
+  --TODO: This plugin+snacks+this config results error sometimes, fix it later
   opts = function(_, opts)
     -- Ensure to copy the default LazyVim lualine options to preserve them
     opts.options.globalstatus = true
@@ -14,5 +15,6 @@ return {
     -- Clear out the default sections to prevent double rendering at the bottom
     opts.sections = {}
     opts.inactive_sections = opts.sections
+    return opts
   end,
 }
