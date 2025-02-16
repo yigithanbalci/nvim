@@ -5,7 +5,6 @@ return {
   -- {
   --   "EdenEast/nightfox.nvim",
   --   name = "nightfox",
-  --   priority = 1000,
   --   opts = function(_, opts)
   --     if vim.fn.has("termguicolors") == 1 then
   --       vim.opt.termguicolors = true
@@ -17,7 +16,6 @@ return {
   {
     "sainnhe/gruvbox-material",
     name = "gruvbox-material",
-    priority = 1000,
     opts = function(_, opts)
       if vim.fn.has("termguicolors") == 1 then
         vim.opt.termguicolors = true
