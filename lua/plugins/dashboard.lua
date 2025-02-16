@@ -1,4 +1,3 @@
-local Util = require("lazyvim.util")
 return {
   { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
   {

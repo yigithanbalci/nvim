@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
-  --TODO: This plugin+snacks+this config results error sometimes, fix it later
+  event = "VeryLazy",
+  -- TODO: This plugin+snacks+this config results error sometimes, fix it later
   opts = function(_, opts)
     -- Ensure to copy the default LazyVim lualine options to preserve them
     opts.options.globalstatus = true
