@@ -13,6 +13,9 @@ map("n", "N", "Nzzzv", { desc = "Navigate previous and center the page" })
 --map("n", "<S-h>", '<Cmd>execute "normal! H"<CR>', { desc = "Make default H movement"})
 --map("n", "<S-l>", '<Cmd>execute "normal! L"<CR>', { desc = "Make default H movement"})
 map("i", "jj", "<esc>")
+map("i", "jk", "<esc>")
+map("i", "kk", "<esc>")
+map("i", "kj", "<esc>")
 
 -- keys to move selection up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection downwards" })
