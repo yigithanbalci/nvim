@@ -6,6 +6,7 @@ return {
       spec = {
         ["<leader>h"] = { name = "+harpoon" },
       },
+      preset = "modern",
     },
   },
 }
