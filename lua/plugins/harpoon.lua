@@ -7,7 +7,7 @@ return {
     },
   },
   keys = {
-    { "<leader>h", "", desc = "+harpoon" },
+    { "<leader>h", "", desc = "+Harpoon" },
     {
       "<leader>hm",
       function()

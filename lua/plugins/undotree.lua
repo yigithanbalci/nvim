@@ -29,7 +29,7 @@ return {
         function()
           vim.cmd.UndotreeToggle()
         end,
-        desc = "+undotree",
+        desc = "Undotree Toggle",
       },
     },
   },
