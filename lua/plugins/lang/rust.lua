@@ -59,4 +59,12 @@ return {
       table.insert(opts.sources, { name = "crates" })
     end,
   },
+  {
+    "nvim-neotest/neotest",
+    opts = {
+      adapters = {
+        ["rustaceanvim.neotest"] = {},
+      },
+    },
+  },
 }

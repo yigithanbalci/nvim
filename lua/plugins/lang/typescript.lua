@@ -260,4 +260,16 @@ return {
       },
     },
   },
+  {
+    "nvim-neotest/neotest",
+    dependencies = { "nvim-neotest/neotest-jest" },
+    opts = {
+      adapters = {
+        ["neotest-jest"] = {
+          jestCommand = "npm test --",
+          JestConfigFile = "custom.jest.config.ts",
+        },
+      },
+    },
+  },
 }

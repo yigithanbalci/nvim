@@ -102,4 +102,15 @@ return {
       },
     },
   },
+  {
+    "nvim-neotest/neotest",
+    dependencies = { "fredrikaverpil/neotest-golang" },
+    opts = {
+      adapters = {
+        ["neotest-golang"] = {
+          dap_go_enabled = true,
+        },
+      },
+    },
+  },
 }
