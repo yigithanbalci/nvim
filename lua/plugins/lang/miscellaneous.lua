@@ -12,7 +12,6 @@ return {
         "markdown_inline",
         "query",
         "regex",
-        -------------
         "toml",
         "vim",
         "vimdoc",
