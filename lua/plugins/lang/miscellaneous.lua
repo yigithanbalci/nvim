@@ -1,3 +1,4 @@
+--TODO: does this need update?
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -17,6 +18,16 @@ return {
         "vimdoc",
         "xml",
         "yaml",
+      },
+    },
+  },
+  {
+    --NOTE: double tap diagnostic hover (K) to enter the opened popup
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- markdown
+        marksman = {},
       },
     },
   },
