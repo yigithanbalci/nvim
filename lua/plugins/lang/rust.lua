@@ -1,4 +1,4 @@
---TODO: update this file from lazyvim
+local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -11,26 +11,25 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts_extend = { "ensure_installed" },
-    opts = {
-      ensure_installed = {
-        "codelldb",
-      },
-    },
+    optional = true,
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "codelldb" })
+      if diagnostics == "bacon-ls" then
+        vim.list_extend(opts.ensure_installed, { "bacon" })
+      end
+      return opts
+    end,
   },
   {
-    --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
     opts = {
-      -- LSP Server Settings
-      ---@type lspconfig.options
       servers = {
-        marksman = {},
+        bacon_ls = {
+          enabled = diagnostics == "bacon-ls",
+        },
+        rust_analyzer = { enabled = false },
       },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {},
     },
   },
   {
@@ -38,7 +37,15 @@ return {
     event = { "BufRead Cargo.toml" },
     opts = {
       completion = {
-        cmp = { enabled = true },
+        crates = {
+          enabled = true,
+        },
+      },
+      lsp = {
+        enabled = true,
+        actions = true,
+        completion = true,
+        hover = true,
       },
     },
   },
@@ -70,7 +77,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
+    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
     ft = { "rust" },
     opts = {
       server = {
@@ -92,8 +99,12 @@ return {
                 enable = true,
               },
             },
-            -- Add clippy lints for Rust.
-            checkOnSave = true,
+            -- Add clippy lints for Rust if using rust-analyzer
+            checkOnSave = diagnostics == "rust-analyzer",
+            -- Enable diagnostics if using rust-analyzer
+            diagnostics = {
+              enable = diagnostics == "rust-analyzer",
+            },
             procMacro = {
               enable = true,
               ignored = {
@@ -102,11 +113,36 @@ return {
                 ["async-recursion"] = { "async_recursion" },
               },
             },
+            files = {
+              excludeDirs = {
+                ".direnv",
+                ".git",
+                ".github",
+                ".gitlab",
+                "bin",
+                "node_modules",
+                "target",
+                "venv",
+                ".venv",
+              },
+            },
           },
         },
       },
     },
     config = function(_, opts)
+      if LazyVim.has("mason.nvim") then
+        local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
+        local codelldb = package_path .. "/extension/adapter/codelldb"
+        local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
+        local uname = io.popen("uname"):read("*l")
+        if uname == "Linux" then
+          library_path = package_path .. "/extension/lldb/lib/liblldb.so"
+        end
+        opts.dap = {
+          adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
+        }
+      end
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
       if vim.fn.executable("rust-analyzer") == 0 then
         LazyVim.error(

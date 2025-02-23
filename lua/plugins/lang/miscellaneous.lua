@@ -21,6 +21,16 @@ return {
     },
   },
   {
+    --NOTE: double tap diagnostic hover (K) to enter the opened popup
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- markdown
+        marksman = {},
+      },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     keys = {
       {
