@@ -24,9 +24,6 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.test.core" },
-    -- NOTE: blink is not stable now and will use nvim-cmp instead of blink
-    -- Hence, below line enables nvim-cmp
-    { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
     -- import/override with your plugins
     -- { import = "plugins" },
     { import = "plugins/core" },

@@ -1,0 +1,9 @@
+{
+  "Add TODO Comment": {
+    "prefix": "todo",
+    "body": [
+      "${LINE_COMMENT}TODO: yigithanbalci ${CURRENT_DATE}-${CURRENT_MONTH}-${CURRENT_YEAR}: $0"
+    ],
+    "description": "Insert a TODO comment with Git user name and current date"
+  }
+}

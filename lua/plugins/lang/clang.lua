@@ -110,14 +110,6 @@ return {
     },
   },
   {
-    "nvim-cmp",
-    dependencies = {},
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
-    end,
-  },
-  {
     "mfussenegger/nvim-dap",
     optional = true,
     opts = function(_, opts)
