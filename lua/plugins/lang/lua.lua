@@ -83,7 +83,6 @@ return {
       -- Fetch the Git username
       local git_username = get_git_username()
 
-      -- Define the TODO snippet in LuaSnip
       luasnip.add_snippets("all", {
         luasnip.snippet("todo", {
           luasnip.text_node("//TODO: "),
