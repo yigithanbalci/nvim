@@ -1,3 +1,4 @@
+--TODO: update this file from lazyvim
 return {
   {
     "nvim-treesitter/nvim-treesitter",
