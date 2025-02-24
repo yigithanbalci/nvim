@@ -27,15 +27,18 @@ return {
           show_hidden = true,
         },
       })
-
-      -- Open parent directory in current window
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-
-      -- Open parent directory in floating window
-      vim.keymap.set("n", "<space>-", require("oil").toggle_float)
     end,
     keys = {
-      { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
+      { "<leader>e", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
+      { "<leader>o", "", desc = "Oil", remap = true },
+      {
+        "<leader>o-",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "Open parent directory in Floating Window",
+        remap = true,
+      },
     },
   },
 }
