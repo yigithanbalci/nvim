@@ -17,6 +17,7 @@ return {
           ["<C-l>"] = false,
           ["<C-k>"] = false,
           ["<C-j>"] = false,
+          ["<BS>"] = { "actions.parent", mode = "n" },
           ["<M-h>"] = "actions.select_split",
           ["q"] = "actions.close",
         },
@@ -29,14 +30,13 @@ return {
       })
     end,
     keys = {
-      { "<leader>e", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
-      { "<leader>o", "", desc = "Oil", remap = true },
+      { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
       {
-        "<leader>o-",
+        "<leader>e",
         function()
           require("oil").toggle_float()
         end,
-        desc = "Open parent directory in Floating Window",
+        desc = "Oil Toggle Float",
         remap = true,
       },
     },
