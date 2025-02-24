@@ -30,9 +30,9 @@ return {
       })
     end,
     keys = {
-      { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
+      -- { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
       {
-        "<leader>e",
+        "<leader>o",
         function()
           require("oil").toggle_float()
         end,
