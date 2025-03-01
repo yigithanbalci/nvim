@@ -41,6 +41,7 @@ return {
                 },
                 jdk = {
                   auto_install = false,
+                  version = "23.0.2",
                 },
                 root_markers = {
                   "settings.gradle",
