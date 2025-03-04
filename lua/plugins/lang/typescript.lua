@@ -1,3 +1,6 @@
+if not vim.g.my_config.langs.typescript.enabled then
+  return {}
+end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
