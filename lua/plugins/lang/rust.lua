@@ -1,4 +1,7 @@
-local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
+if not vim.g.my_config.langs.rust.enabled then
+  return {}
+end
+local diagnostics = vim.g.my_config.langs.rust.diagnostics or "rust-analyzer"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
