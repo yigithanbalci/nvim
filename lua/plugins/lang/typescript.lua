@@ -1,3 +1,6 @@
+if not vim.g.my_config.langs.typescript.enabled then
+  return {}
+end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -219,6 +222,15 @@ return {
             priority = 200,
             filter = "eslint",
           })
+          -- Add Eslint and use it for formatting
+          -- https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
+          -- require("lazyvim.util").lsp.on_attach(function(client)
+          --   if client.name == "eslint" then
+          --     client.server_capabilities.documentFormattingProvider = true
+          --   elseif client.name == "tsserver" then
+          --     client.server_capabilities.documentFormattingProvider = false
+          --   end
+          -- end)
 
           -- Use EslintFixAll on Neovim < 0.10.0
           if not pcall(require, "vim.lsp._dynamic") then
@@ -266,7 +278,7 @@ return {
     opts = {
       adapters = {
         ["neotest-jest"] = {
-          jestCommand = "npm test --",
+          jestCommand = "npm test --detectOpenHandles",
           JestConfigFile = "custom.jest.config.ts",
         },
       },
