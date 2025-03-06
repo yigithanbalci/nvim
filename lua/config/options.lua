@@ -158,4 +158,9 @@ vim.g.my_config = {
       enabled = true,
     },
   },
+  ai = {
+    avante = {
+      enabled = false,
+    },
+  },
 }
