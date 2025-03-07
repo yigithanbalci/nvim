@@ -15,7 +15,27 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.lsp.buf.code_action({
       apply = true,
       context = {
-        only = { "source.removeUnused.ts" },
+        only = {
+          "source.removeUnused.ts",
+        },
+        diagnostics = {},
+      },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = {
+        only = {
+          "source.addMissingImports.ts",
+        },
+        diagnostics = {},
+      },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = {
+        only = {
+          "source.organizeImports",
+        },
         diagnostics = {},
       },
     })
