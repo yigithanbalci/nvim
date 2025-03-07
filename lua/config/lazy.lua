@@ -28,6 +28,9 @@ require("lazy").setup({
     -- utilities
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
+    -- Linting and formatting (TypeScript)
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
     -- import/override with your plugins
     -- { import = "plugins" },
     { import = "plugins/core" },
