@@ -137,7 +137,7 @@ vim.g.my_config = {
       enabled = true,
     },
     java = {
-      enabled = true,
+      enabled = false,
     },
     ocaml = {
       enabled = true,
