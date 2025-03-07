@@ -137,7 +137,7 @@ vim.g.my_config = {
       enabled = true,
     },
     java = {
-      enabled = true,
+      enabled = false,
     },
     ocaml = {
       enabled = true,
@@ -156,6 +156,11 @@ vim.g.my_config = {
     },
     zig = {
       enabled = true,
+    },
+  },
+  ai = {
+    avante = {
+      enabled = false,
     },
   },
 }
