@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main # Change this to your default branch
-    # paths:
-    #   - "version" # Runs only if version.txt changes
+    paths:
+      - "version" # Runs only if version.txt changes
 
 permissions:
   contents: write # Allows creating tags/releases
