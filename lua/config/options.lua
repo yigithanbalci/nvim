@@ -129,6 +129,13 @@ vim.g.markdown_recommended_style = 0
 
 -- Enable Language Plugins that might not be used at all for some configuration (e.g. work)
 vim.g.my_config = {
+  theme = {
+    enabled = true,
+    scheme = {
+      name = "tokyonight",
+      style = "tokyonight-moon",
+    },
+  },
   langs = {
     clang = {
       enabled = true,
