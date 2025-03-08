@@ -28,9 +28,14 @@ jobs:
           fi
 
       - name: Create Git Tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git tag $VERSION
-          git push origin $VERSION
+          git push https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git $VERSION
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
