@@ -1,3 +1,9 @@
+-- Sets colors to line numbers Above, Current and Below  in this order
+function LineNumberColors()
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#51B3EC", bold = true })
+  vim.api.nvim_set_hl(0, "LineNr", { fg = "white", bold = true })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#FB508F", bold = true })
+end
 return {
   --{ "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = {
   --  flavour = "macchiato",
@@ -37,5 +43,9 @@ return {
   {
     "EdenEast/nightfox.nvim",
     name = "nightfox",
+    opts = function(_, opts)
+      LineNumberColors()
+      return opts
+    end,
   },
 }
