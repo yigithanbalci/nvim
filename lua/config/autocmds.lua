@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
       apply = true,
       context = {
         only = {
-          "source.removeUnused.ts",
+          "source.removeUnusedImports",
         },
         diagnostics = {},
       },
