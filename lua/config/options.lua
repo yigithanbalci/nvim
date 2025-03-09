@@ -146,6 +146,9 @@ vim.g.my_config = {
     java = {
       enabled = false,
     },
+    markdown = {
+      enabled = true,
+    },
     ocaml = {
       enabled = true,
     },
