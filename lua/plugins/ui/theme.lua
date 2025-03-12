@@ -10,9 +10,12 @@ function LineNumberColors()
 end
 -- Sets theme
 function SetTheme()
+  if vim.fn.has("termguicolors") == 1 then
+    vim.opt.termguicolors = true
+  end
   if vim.g.my_config.theme.scheme then
     if vim.g.my_config.theme.scheme.name then
-      if vim.g.my_config.theme.scheme.style then
+      if vim.g.my_config.theme.scheme.style and vim.g.my_config.theme.scheme.style ~= "" then
         vim.cmd("colorscheme " .. vim.g.my_config.theme.scheme.style)
       else
         vim.cmd("colorscheme " .. vim.g.my_config.theme.scheme.name)
@@ -29,9 +32,6 @@ return {
     "EdenEast/nightfox.nvim",
     name = "nightfox",
     opts = function(_, opts)
-      if vim.fn.has("termguicolors") == 1 then
-        vim.opt.termguicolors = true
-      end
       SetTheme()
       return opts
     end,
@@ -40,10 +40,7 @@ return {
     "sainnhe/gruvbox-material",
     name = "gruvbox-material",
     opts = function(_, opts)
-      if vim.fn.has("termguicolors") == 1 then
-        vim.opt.termguicolors = true
-      end
-      vim.opt.background = "dark"
+      vim.o.background = vim.g.my_config.theme.scheme.background == "light" or "dark"
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_enable_bold = 1
       vim.g.gruvbox_material_background = "hard"
@@ -122,6 +119,33 @@ return {
     lazy = true,
     opts = function(_, opts)
       SetTheme()
+      return opts
+    end,
+  },
+  {
+    "ayu-theme/ayu-vim",
+    lazy = true,
+    opts = function(_, opts)
+      SetTheme()
+      vim.g.ayucolor = vim.g.my_config.theme.scheme.background == "light" or "dark"
+      return opts
+    end,
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = true,
+    opts = function(_, opts)
+      SetTheme()
+      vim.o.background = vim.g.my_config.theme.scheme.background == "light" or "dark"
+      return opts
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    opts = function(_, opts)
+      SetTheme()
+      -- opts.theme = vim.g.my_config.theme.scheme.style or "wave"
       return opts
     end,
   },

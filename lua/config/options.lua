@@ -134,6 +134,7 @@ vim.g.my_config = {
     scheme = {
       name = "tokyonight",
       style = "tokyonight-moon",
+      background = "dark",
     },
   },
   langs = {
