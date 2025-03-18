@@ -8,6 +8,13 @@ function LineNumberColors()
   vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff966c", bold = true })
   vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#FB508F", bold = true })
 end
+-- Apply custom highlights every time a colorscheme is loaded
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    LineNumberColors()
+  end,
+})
 -- Sets theme
 function SetTheme()
   if vim.fn.has("termguicolors") == 1 then
@@ -22,9 +29,6 @@ function SetTheme()
       end
     end
   end
-  -- NOTE: Line number colors can only override after setting theme
-  -- This also seems like not overriding current line number color somehow
-  LineNumberColors()
 end
 
 local function get_active_colorscheme()
@@ -120,7 +124,6 @@ local function get_active_colorscheme()
       lazy = true,
       opts = function(_, opts)
         SetTheme()
-        opts.style = "moon"
         return opts
       end,
     },
