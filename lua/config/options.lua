@@ -129,6 +129,8 @@ vim.g.markdown_recommended_style = 0
 
 -- Enable Language Plugins that might not be used at all for some configuration (e.g. work)
 vim.g.my_config = {
+  -- The picker is either fzf-lua or telescope
+  search = "fzf-lua",
   theme = {
     enabled = true,
     scheme = {
