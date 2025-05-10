@@ -9,8 +9,6 @@ return {
         "html",
         "json",
         "jsonc",
-        "markdown",
-        "markdown_inline",
         "query",
         "regex",
         "toml",
@@ -24,12 +22,7 @@ return {
   {
     --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        -- markdown
-        marksman = {},
-      },
-    },
+    opts = {},
   },
   {
     "stevearc/conform.nvim",
@@ -47,8 +40,6 @@ return {
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },
-        markdown = { "prettier", "markdown-cli2", "markdown-toc" },
-        ["markdown.mdx"] = { "prettier", "markdown-cli2", "markdown-toc" },
       },
     },
   },
