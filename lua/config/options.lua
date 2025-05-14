@@ -147,7 +147,7 @@ vim.g.my_config = {
       enabled = false,
     },
     flutter = {
-      enabled = true,
+      enabled = false,
       config = "flutter-tools",
     },
     java = {
