@@ -1,3 +1,6 @@
+if not vim.g.my_config.langs.clang.enabled then
+  return {}
+end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
