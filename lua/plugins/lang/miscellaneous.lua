@@ -20,9 +20,35 @@ return {
     },
   },
   {
+    "williamboman/mason.nvim",
+    opts_extend = { "ensure_installed" },
+    opts = {
+      ensure_installed = {
+        "taplo",
+      },
+    },
+  },
+  {
     --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
-    opts = {},
+    opts = {
+      servers = {
+        --TODO yigithanbalci 14-05-2025: fix indent_tables for taplo
+        taplo = {
+          indent_tables = true, -- 💡 Enable indenting tables
+          settings = {
+            taplo = {
+              formatter = {
+                indent_tables = true, -- 💡 Enable indenting tables
+                compact_arrays = false,
+                compact_inline_tables = false,
+              },
+            },
+          },
+        },
+      },
+    },
+    setup = {},
   },
   {
     "stevearc/conform.nvim",
@@ -40,6 +66,7 @@ return {
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },
+        toml = { "taplo" },
       },
     },
   },
