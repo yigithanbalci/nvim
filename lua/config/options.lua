@@ -127,14 +127,57 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
--- LSP Server to use for Python.
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
--- Set to "ruff_lsp" to use the old LSP implementation version.
-vim.g.lazyvim_python_ruff = "ruff"
-
--- LSP Server to use for Rust.
--- Set to "bacon-ls" to use bacon-ls instead of rust-analyzer.
--- only for diagnostics. The rest of LSP support will still be
--- provided by rust-analyzer.
-vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
+-- Enable Language Plugins that might not be used at all for some configuration (e.g. work)
+vim.g.my_config = {
+  -- The picker is either fzf-lua or telescope
+  search = "fzf-lua",
+  theme = {
+    enabled = true,
+    scheme = {
+      name = "tokyonight",
+      style = "tokyonight-moon",
+      background = "dark",
+    },
+  },
+  langs = {
+    clang = {
+      enabled = true,
+    },
+    go = {
+      enabled = false,
+    },
+    flutter = {
+      enabled = true,
+      config = "flutter-tools",
+    },
+    java = {
+      enabled = false,
+    },
+    markdown = {
+      enabled = true,
+    },
+    ocaml = {
+      enabled = false,
+    },
+    python = {
+      enabled = true,
+      lsp = "pyright",
+      ruff = "ruff",
+    },
+    rust = {
+      enabled = false,
+      diagnostics = "rust-analyzer",
+    },
+    typescript = {
+      enabled = true,
+    },
+    zig = {
+      enabled = false,
+    },
+  },
+  ai = {
+    avante = {
+      enabled = false,
+    },
+  },
+}
