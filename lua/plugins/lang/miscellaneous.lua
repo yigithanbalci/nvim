@@ -33,22 +33,14 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        --TODO yigithanbalci 14-05-2025: fix indent_tables for taplo
+        --TODO yigithanbalci 14-05-2025: fix dependency on taplo.toml in project root
+        -- make formatter options work with .config dir or pass through lspconfig
         taplo = {
-          indent_tables = true, -- 💡 Enable indenting tables
-          settings = {
-            taplo = {
-              formatter = {
-                indent_tables = true, -- 💡 Enable indenting tables
-                compact_arrays = false,
-                compact_inline_tables = false,
-              },
-            },
-          },
+          filetypes = { "toml" },
+          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
         },
       },
     },
-    setup = {},
   },
   {
     "stevearc/conform.nvim",
