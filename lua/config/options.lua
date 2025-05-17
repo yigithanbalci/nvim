@@ -57,7 +57,8 @@ opt.autowrite = true -- Enable auto write
 -- NOTE: do not sync with system clipboard
 --opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.clipboard = ""
-opt.completeopt = "menu,menuone,noselect"
+-- opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menuone,noinsert,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
@@ -145,6 +146,10 @@ vim.g.my_config = {
     },
     go = {
       enabled = true,
+    },
+    flutter = {
+      enabled = true,
+      config = "flutter-tools",
     },
     java = {
       enabled = false,

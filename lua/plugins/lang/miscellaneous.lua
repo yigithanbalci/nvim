@@ -20,9 +20,27 @@ return {
     },
   },
   {
+    "williamboman/mason.nvim",
+    opts_extend = { "ensure_installed" },
+    opts = {
+      ensure_installed = {
+        "taplo",
+      },
+    },
+  },
+  {
     --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
-    opts = {},
+    opts = {
+      servers = {
+        --TODO yigithanbalci 14-05-2025: fix dependency on taplo.toml in project root
+        -- make formatter options work with .config dir or pass through lspconfig
+        taplo = {
+          filetypes = { "toml" },
+          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+        },
+      },
+    },
   },
   {
     "stevearc/conform.nvim",
@@ -40,6 +58,7 @@ return {
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },
+        toml = { "taplo" },
       },
     },
   },
