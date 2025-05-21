@@ -9,7 +9,11 @@ elseif vim.g.my_config.langs.flutter.config == "flutter-tools" then
         "nvim-lua/plenary.nvim",
         "stevearc/dressing.nvim", -- optional for vim.ui.select
       },
-      config = true,
+      opts = {
+        settings = {
+          enableSnippet = true,
+        },
+      },
     },
   }
 end
