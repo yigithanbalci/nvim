@@ -9,8 +9,6 @@ return {
         "html",
         "json",
         "jsonc",
-        "markdown",
-        "markdown_inline",
         "query",
         "regex",
         "toml",
@@ -22,12 +20,25 @@ return {
     },
   },
   {
+    "williamboman/mason.nvim",
+    opts_extend = { "ensure_installed" },
+    opts = {
+      ensure_installed = {
+        "taplo",
+      },
+    },
+  },
+  {
     --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- markdown
-        marksman = {},
+        --TODO yigithanbalci 14-05-2025: fix dependency on taplo.toml in project root
+        -- make formatter options work with .config dir or pass through lspconfig
+        taplo = {
+          filetypes = { "toml" },
+          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+        },
       },
     },
   },
@@ -47,8 +58,7 @@ return {
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },
-        markdown = { "prettier", "markdown-cli2", "markdown-toc" },
-        ["markdown.mdx"] = { "prettier", "markdown-cli2", "markdown-toc" },
+        toml = { "taplo" },
       },
     },
   },

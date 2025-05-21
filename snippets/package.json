@@ -5,6 +5,10 @@
       {
         "language": "all",
         "path": "./allFiletypes.json"
+      },
+      {
+        "language": "dart",
+        "path": "./flutter.json"
       }
     ]
   }

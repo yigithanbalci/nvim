@@ -47,3 +47,16 @@ map("n", "+", ":horizontal resize +2<CR>", { desc = "Horizontal resize window(+)
 map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)" })
 --NOTE: Add C-Space A-Space mapping in cmp config (completion)
 --NOTE: double tap diagnostic hover (K) to enter the opened popup
+
+--NOTE: Default inside and around commands do not execute for next
+-- but rather the one that cursor is inside.
+-- So, this mappings do search for next one and then do the editing.
+-- For normal behaviour use with step e.g. c1i[
+-- Removed these because they were not working and surprisingly lazyvim has cin[ mappings
+-- local chars = { '"', "'", "(", "[", "{", "<" }
+-- for _, char in ipairs(chars) do
+--   for _, op in ipairs({ "c", "d", "v" }) do
+--     vim.keymap.set("n", op .. "i" .. char, "f" .. char .. op .. "i" .. char, { noremap = true })
+--     vim.keymap.set("n", op .. "a" .. char, "f" .. char .. op .. "a" .. char, { noremap = true })
+--   end
+-- end

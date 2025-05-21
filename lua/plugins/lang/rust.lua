@@ -1,4 +1,7 @@
-local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
+if not vim.g.my_config.langs.rust.enabled then
+  return {}
+end
+local diagnostics = vim.g.my_config.langs.rust.diagnostics or "rust-analyzer"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -59,7 +62,7 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
+    version = vim.fn.has("nvim-0.10.0") == 0 and "^5" or false,
     ft = { "rust" },
     opts = {
       server = {
