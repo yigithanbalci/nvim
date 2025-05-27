@@ -30,7 +30,15 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = {
-            "branch",
+            {
+              "branch",
+              fmt = function(branch)
+                if #branch > 22 then
+                  return branch:sub(1, 19) .. "…"
+                end
+                return branch
+              end,
+            },
             {
               "diff",
               symbols = {
