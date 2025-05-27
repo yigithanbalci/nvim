@@ -32,12 +32,12 @@ return {
           lualine_b = {
             {
               "branch",
-              fmt = function(branch)
-                if #branch > 22 then
-                  return branch:sub(1, 19) .. "…"
-                end
-                return branch
-              end,
+              -- fmt = function(branch)
+              --   if #branch > 22 then
+              --     return branch:sub(1, 19) .. "…"
+              --   end
+              --   return branch
+              -- end,
             },
             {
               "diff",
@@ -62,10 +62,24 @@ return {
             LazyVim.lualine.root_dir(),
             {
               "filetype",
-              icon_only = false,
+              icon_only = true,
               padding = { left = 1, right = 1 },
             },
-            { LazyVim.lualine.pretty_path() }, -- path
+            {
+              "filename",
+              file_status = true,
+              newfile_status = true,
+              path = 0,
+              -- shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+              symbols = {
+                modified = "[+]", -- Text to show when the file is modified.
+                readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "[No Name]", -- Text to show for unnamed buffers.
+                newfile = "[New]", -- Text to show for newly created file before first write
+              },
+            },
+            --NOTE: is path really needed?
+            -- { LazyVim.lualine.pretty_path() }, -- path
           },
           lualine_x = {
             Snacks.profiler.status(),
@@ -109,27 +123,6 @@ return {
                 return { fg = Snacks.util.color("Special") }
               end,
             },
-            --NOTE: If lualine will be too long, comment out following section
-            --to remove LSP information from the right side of lualine
-            -- {
-            --   function()
-            --     local clients = vim.lsp.get_clients({ bufnr = 0 })
-            --     if #clients == 0 then
-            --       return ""
-            --     end
-            --     local names = {}
-            --     for _, client in ipairs(clients) do
-            --       table.insert(names, client.name)
-            --     end
-            --     return " " .. table.concat(names, ", ")
-            --   end,
-            --   cond = function()
-            --     return #vim.lsp.get_clients({ bufnr = 0 }) > 0
-            --   end,
-            --   color = function()
-            --     return { fg = Snacks.util.color("Type") }
-            --   end,
-            -- },
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
@@ -146,42 +139,35 @@ return {
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
+            {
+              function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                if #clients == 0 then
+                  return ""
+                end
+                local names = {}
+                for _, client in ipairs(clients) do
+                  table.insert(names, client.name)
+                end
+                return " " .. table.concat(names, ", ")
+              end,
+              cond = function()
+                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
+              end,
+              --what a weird color was that
+              -- color = function()
+              --   return { fg = Snacks.util.color("Type") }
+              -- end,
+            },
+            {
+              function()
+                return " " .. os.date("%R")
+              end,
+            },
           },
         },
         extensions = { "neo-tree", "lazy", "fzf" },
       }
-
-      -- do not add trouble symbols if aerial is enabled
-      -- And allow it to be overriden for some buffer types (see autocmds)
-      if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
-        local trouble = require("trouble")
-        local symbols = trouble.statusline({
-          mode = "symbols",
-          groups = {},
-          title = false,
-          filter = { range = true },
-          format = "{kind_icon}{symbol.name:Normal}",
-          hl_group = "lualine_c_normal",
-        })
-        table.insert(opts.sections.lualine_c, {
-          function()
-            local status = symbols and symbols.get and symbols.get()
-            if not status then
-              return ""
-            end
-            -- Split symbol path (e.g., A::B::C) and limit depth
-            local parts = vim.split(status, "::", { plain = true })
-            local trimmed = table.concat(vim.list_slice(parts, math.max(1, #parts - 1)), "::")
-            return trimmed
-          end,
-          cond = function()
-            return vim.b.trouble_lualine ~= false and symbols.has()
-          end,
-        })
-      end
 
       return opts
     end,
