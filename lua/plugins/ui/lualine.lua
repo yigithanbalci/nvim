@@ -157,7 +157,16 @@ return {
           hl_group = "lualine_c_normal",
         })
         table.insert(opts.sections.lualine_c, {
-          symbols and symbols.get,
+          function()
+            local status = symbols and symbols.get and symbols.get()
+            if not status then
+              return ""
+            end
+            -- Split symbol path (e.g., A::B::C) and limit depth
+            local parts = vim.split(status, "::", { plain = true })
+            local trimmed = table.concat(vim.list_slice(parts, math.max(1, #parts - 1)), "::")
+            return trimmed
+          end,
           cond = function()
             return vim.b.trouble_lualine ~= false and symbols.has()
           end,
