@@ -132,14 +132,6 @@ vim.g.markdown_recommended_style = 0
 vim.g.my_config = {
   -- The picker is either fzf-lua or telescope
   search = "fzf-lua",
-  theme = {
-    enabled = true,
-    scheme = {
-      name = "tokyonight",
-      style = "tokyonight-moon",
-      background = "dark",
-    },
-  },
   langs = {
     clang = {
       enabled = true,
