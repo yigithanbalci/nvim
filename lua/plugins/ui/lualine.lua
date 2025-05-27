@@ -52,8 +52,12 @@ return {
           },
           lualine_c = {
             LazyVim.lualine.root_dir(),
-            { LazyVim.lualine.pretty_path() }, -- short file path
-            { "filetype", icon_only = false }, -- filetype + icon
+            {
+              "filetype",
+              icon_only = false,
+              padding = { left = 1, right = 1 },
+            },
+            { LazyVim.lualine.pretty_path() }, -- path
           },
           lualine_x = {
             Snacks.profiler.status(),
