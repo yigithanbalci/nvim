@@ -82,7 +82,7 @@ return {
               {
                 icon = " ",
                 title = "Git Status",
-                cmd = "git --no-pager diff --stat -B -M -C",
+                cmd = "GIT_PAGER=cat git diff --stat -B -M -C",
                 height = 10,
               },
             }
