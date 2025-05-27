@@ -22,15 +22,46 @@ return {
     lazy = false,
     opts = {
       themes = {
-        {
-          name = "Day",
-          colorscheme = "kanagawa-lotus",
-        },
-        {
-          name = "Night",
-          colorscheme = "kanagawa-dragon",
-        },
+        -- Kanagawa
+        { name = "Kanagawa Day", colorscheme = "kanagawa-lotus" },
+        { name = "Kanagawa Night", colorscheme = "kanagawa-dragon" },
+        { name = "Kanagawa Neon", colorscheme = "kanagawa-wave" },
+
+        -- Nightfox
+        { name = "Nightfox", colorscheme = "nightfox" },
+        { name = "Dayfox", colorscheme = "dayfox" },
+        { name = "Dawnfox", colorscheme = "dawnfox" },
+        { name = "Duskfox", colorscheme = "duskfox" },
+        { name = "Nordfox", colorscheme = "nordfox" },
+        { name = "Terrafox", colorscheme = "terafox" },
+        { name = "Carbonfox", colorscheme = "carbonfox" },
+
+        -- Catppuccin
+        { name = "Catppuccin Latte", colorscheme = "catppuccin-latte" },
+        { name = "Catppuccin Frappe", colorscheme = "catppuccin-frappe" },
+        { name = "Catppuccin Macchiato", colorscheme = "catppuccin-macchiato" },
+        { name = "Catppuccin Mocha", colorscheme = "catppuccin-mocha" },
+
+        -- Gruvbox (material and classic)
+        { name = "Gruvbox Material Soft", colorscheme = "gruvbox-material" }, -- set background via `vim.g`
+        { name = "Gruvbox Material Medium", colorscheme = "gruvbox-material" },
+        { name = "Gruvbox Material Hard", colorscheme = "gruvbox-material" },
+        { name = "Gruvbox (ellisonleao)", colorscheme = "gruvbox" },
+
+        -- TokyoNight
+        { name = "TokyoNight Storm", colorscheme = "tokyonight-storm" },
+        { name = "TokyoNight Night", colorscheme = "tokyonight-night" },
+        { name = "TokyoNight Moon", colorscheme = "tokyonight-moon" },
+        { name = "TokyoNight Day", colorscheme = "tokyonight-day" },
+
+        -- Ayu
+        { name = "Ayu Light", colorscheme = "ayu", after = [[vim.g.ayucolor="light"]] },
+        { name = "Ayu Mirage", colorscheme = "ayu", after = [[vim.g.ayucolor="light"]] },
+        { name = "Ayu Dark", colorscheme = "ayu", after = [[vim.g.ayucolor="dark"]] },
       },
+    },
+    themeConfig = {
+      defaultTheme = "TokyoNight Storm",
     },
     keys = {
       {
@@ -128,7 +159,7 @@ return {
   {
     "ayu-theme/ayu-vim",
     lazy = true,
-    opts = {},
+    config = function(_, opts) end,
   },
   {
     "ellisonleao/gruvbox.nvim",
