@@ -111,25 +111,25 @@ return {
             },
             --NOTE: If lualine will be too long, comment out following section
             --to remove LSP information from the right side of lualine
-            {
-              function()
-                local clients = vim.lsp.get_clients({ bufnr = 0 })
-                if #clients == 0 then
-                  return ""
-                end
-                local names = {}
-                for _, client in ipairs(clients) do
-                  table.insert(names, client.name)
-                end
-                return " " .. table.concat(names, ", ")
-              end,
-              cond = function()
-                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
-              end,
-              color = function()
-                return { fg = Snacks.util.color("Type") }
-              end,
-            },
+            -- {
+            --   function()
+            --     local clients = vim.lsp.get_clients({ bufnr = 0 })
+            --     if #clients == 0 then
+            --       return ""
+            --     end
+            --     local names = {}
+            --     for _, client in ipairs(clients) do
+            --       table.insert(names, client.name)
+            --     end
+            --     return " " .. table.concat(names, ", ")
+            --   end,
+            --   cond = function()
+            --     return #vim.lsp.get_clients({ bufnr = 0 }) > 0
+            --   end,
+            --   color = function()
+            --     return { fg = Snacks.util.color("Type") }
+            --   end,
+            -- },
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
