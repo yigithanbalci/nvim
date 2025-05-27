@@ -137,10 +137,10 @@ vim.g.my_config = {
       enabled = true,
     },
     go = {
-      enabled = true,
+      enabled = false,
     },
     flutter = {
-      enabled = true,
+      enabled = false,
       config = "flutter-tools",
     },
     java = {
@@ -150,22 +150,22 @@ vim.g.my_config = {
       enabled = true,
     },
     ocaml = {
-      enabled = true,
+      enabled = false,
     },
     python = {
-      enabled = true,
+      enabled = false,
       lsp = "pyright",
       ruff = "ruff",
     },
     rust = {
-      enabled = true,
+      enabled = false,
       diagnostics = "rust-analyzer",
     },
     typescript = {
       enabled = true,
     },
     zig = {
-      enabled = true,
+      enabled = false,
     },
   },
   ai = {
