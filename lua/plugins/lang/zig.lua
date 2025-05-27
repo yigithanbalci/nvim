@@ -7,7 +7,7 @@ return {
     opts = { ensure_installed = { "zig" } },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "zls",

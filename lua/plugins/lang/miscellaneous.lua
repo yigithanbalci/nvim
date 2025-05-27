@@ -1,4 +1,6 @@
 --TODO: does this need update?
+-- keep track of current mode for DAP-UI
+local minimal_mode = false
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -20,7 +22,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
@@ -37,7 +39,9 @@ return {
         -- make formatter options work with .config dir or pass through lspconfig
         taplo = {
           filetypes = { "toml" },
-          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+          root_dir = function(path)
+            return vim.fs.root(path, { "*.toml", ".git" })
+          end,
         },
       },
     },
@@ -55,6 +59,11 @@ return {
       },
     },
     opts = {
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },
@@ -137,70 +146,6 @@ return {
           require("neotest").watch.toggle(vim.fn.expand("%"))
         end,
         desc = "Toggle Watch",
-      },
-    },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    dependencies = {
-      {
-        "rcarriga/nvim-dap-ui",
-        keys = {
-          {
-            "<leader>du",
-            function()
-              require("dapui").toggle({})
-            end,
-            desc = "Dap UI",
-          },
-          {
-            "<leader>de",
-            function()
-              require("dapui").eval(nil, { enter = true })
-            end,
-            desc = "Eval",
-            mode = { "n", "v" },
-          },
-        },
-        opts = {},
-      },
-    },
-    keys = {
-      {
-        "<F1>",
-        function()
-          require("dap").step_into()
-        end,
-        desc = "Step Into",
-      },
-      {
-        "<F2>",
-        function()
-          require("dap").step_over()
-        end,
-        desc = "Step Over",
-      },
-      {
-        "<F3>",
-        function()
-          require("dap").step_out()
-        end,
-        desc = "Step Out",
-      },
-      {
-        "<F4>",
-        function()
-          require("dap").run_to_cursor()
-        end,
-        desc = "Run to Cursor",
-      },
-      {
-        "<F5>",
-        function()
-          require("dap").continue()
-        end,
-        desc = "Continue",
       },
     },
   },
