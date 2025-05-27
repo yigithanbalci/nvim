@@ -180,5 +180,8 @@ vim.g.my_config = {
     avante = {
       enabled = false,
     },
+    copilot = {
+      enabled = true,
+    },
   },
 }
