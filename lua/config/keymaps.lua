@@ -60,3 +60,6 @@ map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)
 --     vim.keymap.set("n", op .. "a" .. char, "f" .. char .. op .. "a" .. char, { noremap = true })
 --   end
 -- end
+
+--NOTE: Some fancy keymappings for not being able to remember them
+map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
