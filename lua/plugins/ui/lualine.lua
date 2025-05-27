@@ -109,6 +109,8 @@ return {
                 return { fg = Snacks.util.color("Special") }
               end,
             },
+            --NOTE: If lualine will be too long, comment out following section
+            --to remove LSP information from the right side of lualine
             {
               function()
                 local clients = vim.lsp.get_clients({ bufnr = 0 })
