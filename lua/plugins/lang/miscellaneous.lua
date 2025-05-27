@@ -20,7 +20,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
@@ -37,7 +37,9 @@ return {
         -- make formatter options work with .config dir or pass through lspconfig
         taplo = {
           filetypes = { "toml" },
-          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+          root_dir = function(path)
+            return vim.fs.root(path, { "*.toml", ".git" })
+          end,
         },
       },
     },
@@ -55,6 +57,11 @@ return {
       },
     },
     opts = {
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },

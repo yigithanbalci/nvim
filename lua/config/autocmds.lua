@@ -43,3 +43,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     -- })
   end,
 })
+
+-- AutoFormat for Nvim 0.11+ & LazyVim 15+
+-- For whatever reason it was not working
+-- TODO: AutoSave is somewhat too slow compared to LazyVim version below 15
+-- and old plugins, if it continues try to fix it...
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})

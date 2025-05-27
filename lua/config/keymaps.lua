@@ -60,3 +60,10 @@ map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)
 --     vim.keymap.set("n", op .. "a" .. char, "f" .. char .. op .. "a" .. char, { noremap = true })
 --   end
 -- end
+
+--NOTE: Some fancy keymappings for not being able to remember them
+map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
+-- save file
+-- there is a problem while saving it inserts inputs
+-- probably because formatting is too slow, not this mapping
+-- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
