@@ -99,19 +99,18 @@ return {
             },
             {
               function()
-                local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
                 if #clients == 0 then
                   return ""
                 end
                 local names = {}
-                for _, c in ipairs(clients) do
-                  table.insert(names, c.name)
+                for _, client in ipairs(clients) do
+                  table.insert(names, client.name)
                 end
                 return " " .. table.concat(names, ", ")
               end,
               cond = function()
-                local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-                return #clients > 0
+                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
               end,
               color = function()
                 return { fg = Snacks.util.color("Type") }
