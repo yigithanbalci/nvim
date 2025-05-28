@@ -67,7 +67,32 @@ return {
       {
         "<leader>uu",
         ":Themery<CR>",
-        desc = "Theme Pick",
+        desc = "Theme Pick (Themery)",
+      },
+      {
+        "<leader>ut",
+        function()
+          local themery = require("themery")
+          local currentTheme = themery.getCurrentTheme()
+
+          if currentTheme and currentTheme.name:lower():find("catppuccin") then
+            local ok, catppuccin = pcall(require, "catppuccin")
+            if ok then
+              -- Toggle transparent_background
+              catppuccin.options.transparent_background = not catppuccin.options.transparent_background
+              catppuccin.compile() -- Recompile with new settings
+              if currentTheme.colorscheme then
+                vim.cmd("colorscheme " .. currentTheme.colorscheme) -- Reapply current theme
+              else
+                vim.notify(
+                  "[Themery] Cannot reapply theme: `colorscheme` is nil:\npick a recompiled catppuccin theme",
+                  vim.log.levels.WARN
+                )
+              end
+            end
+          end
+        end,
+        desc = "Toggle Transparent BG (Themery)",
       },
     },
   },
