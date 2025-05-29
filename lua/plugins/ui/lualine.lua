@@ -145,10 +145,34 @@ return {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
+          --NOTE: I think it is not needed since every OS has time (clock) on top
+          -- and I don't do GUI-less anyways
+          -- lualine_z = {
+          --   function()
+          --     return " " .. os.date("%R")
+          --   end,
+          -- },
           lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
+            {
+              function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                if #clients == 0 then
+                  return ""
+                end
+                local names = {}
+                for _, client in ipairs(clients) do
+                  table.insert(names, client.name)
+                end
+                return " " .. table.concat(names, ", ")
+              end,
+              cond = function()
+                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
+              end,
+              --what a weird color was that
+              -- color = function()
+              --   return { fg = Snacks.util.color("Type") }
+              -- end,
+            },
           },
         },
         extensions = { "neo-tree", "lazy", "fzf" },
