@@ -16,6 +16,26 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
+-- Apply transparency to all themes not only one
+local transparent_enabled = false
+
+function ToggleTransparency()
+  transparent_enabled = not transparent_enabled
+
+  if transparent_enabled then
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
+    vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+  else
+    vim.cmd("colorscheme " .. vim.g.colors_name) -- reset to theme defaults
+  end
+end
+
 return {
   {
     "zaldih/themery.nvim",
