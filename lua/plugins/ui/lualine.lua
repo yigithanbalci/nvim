@@ -32,12 +32,12 @@ return {
           lualine_b = {
             {
               "branch",
-              fmt = function(branch)
-                if #branch > 22 then
-                  return branch:sub(1, 19) .. "…"
-                end
-                return branch
-              end,
+              -- fmt = function(branch)
+              --   if #branch > 22 then
+              --     return branch:sub(1, 19) .. "…"
+              --   end
+              --   return branch
+              -- end,
             },
             {
               "diff",
@@ -62,8 +62,21 @@ return {
             LazyVim.lualine.root_dir(),
             {
               "filetype",
-              icon_only = false,
+              icon_only = true,
               padding = { left = 1, right = 1 },
+            },
+            {
+              "filename",
+              file_status = true,
+              newfile_status = true,
+              path = 0,
+              -- shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+              symbols = {
+                modified = "[+]", -- Text to show when the file is modified.
+                readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "[No Name]", -- Text to show for unnamed buffers.
+                newfile = "[New]", -- Text to show for newly created file before first write
+              },
             },
             --NOTE: is path really needed?
             -- { LazyVim.lualine.pretty_path() }, -- path
