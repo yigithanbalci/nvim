@@ -65,7 +65,8 @@ return {
               icon_only = false,
               padding = { left = 1, right = 1 },
             },
-            { LazyVim.lualine.pretty_path() }, -- path
+            --NOTE: is path really needed?
+            -- { LazyVim.lualine.pretty_path() }, -- path
           },
           lualine_x = {
             Snacks.profiler.status(),
@@ -109,27 +110,6 @@ return {
                 return { fg = Snacks.util.color("Special") }
               end,
             },
-            --NOTE: If lualine will be too long, comment out following section
-            --to remove LSP information from the right side of lualine
-            -- {
-            --   function()
-            --     local clients = vim.lsp.get_clients({ bufnr = 0 })
-            --     if #clients == 0 then
-            --       return ""
-            --     end
-            --     local names = {}
-            --     for _, client in ipairs(clients) do
-            --       table.insert(names, client.name)
-            --     end
-            --     return " " .. table.concat(names, ", ")
-            --   end,
-            --   cond = function()
-            --     return #vim.lsp.get_clients({ bufnr = 0 }) > 0
-            --   end,
-            --   color = function()
-            --     return { fg = Snacks.util.color("Type") }
-            --   end,
-            -- },
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
@@ -145,13 +125,6 @@ return {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
-          --NOTE: I think it is not needed since every OS has time (clock) on top
-          -- and I don't do GUI-less anyways
-          -- lualine_z = {
-          --   function()
-          --     return " " .. os.date("%R")
-          --   end,
-          -- },
           lualine_z = {
             {
               function()
@@ -172,6 +145,11 @@ return {
               -- color = function()
               --   return { fg = Snacks.util.color("Type") }
               -- end,
+            },
+            {
+              function()
+                return " " .. os.date("%R")
+              end,
             },
           },
         },
