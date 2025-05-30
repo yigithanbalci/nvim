@@ -17,6 +17,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- Apply transparency to all themes not only one
+-- TODO: change this to vim.g and store in state dir
+-- for re-opening nvim
 _G.transparent_enabled = _G.transparent_enabled or false
 
 function SetBGTransparent()
