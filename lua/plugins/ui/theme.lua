@@ -17,11 +17,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- Apply transparency to all themes not only one
-local transparent_enabled = false
+_G.transparent_enabled = _G.transparent_enabled or false
 
 function ToggleTransparency()
-  transparent_enabled = not transparent_enabled
-
   if transparent_enabled then
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
@@ -34,6 +32,7 @@ function ToggleTransparency()
   else
     vim.cmd("colorscheme " .. vim.g.colors_name) -- reset to theme defaults
   end
+  _G.transparent_enabled = not _G.transparent_enabled
 end
 
 return {
@@ -111,8 +110,22 @@ return {
               end
             end
           else
-            -- Toggle transparency for other colorschemes as well
-            ToggleTransparency()
+            if transparent_enabled then
+              vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+              vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+              vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+              vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+              vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+              vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+              vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
+              vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+            elseif currentTheme then
+              -- Properly reapply current Themery theme
+              themery.setThemeByName(currentTheme.name)
+            else
+              vim.notify("No theme to reload", vim.log.levels.ERROR)
+            end
+            _G.transparent_enabled = not _G.transparent_enabled
           end
         end,
         desc = "Toggle Transparent BG (Themery)",
