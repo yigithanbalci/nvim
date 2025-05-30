@@ -50,7 +50,6 @@ return {
     "zaldih/themery.nvim",
     lazy = false,
     opts = {
-      --TODO: fix inconsistent transparency when changing themes
       globalAfter = [[ _G.SetBGTransparentIfTransparentEnabled() ]],
       themes = {
         -- Kanagawa
@@ -106,25 +105,26 @@ return {
           local themery = require("themery")
           local currentTheme = themery.getCurrentTheme()
 
-          --TODO: fix inconsistent transparency when changing themes
           if not currentTheme then
             vim.notify("No theme to toggle transparency", vim.log.levels.ERROR)
             return
           end
+          --TODO: fix inconsistent transparency when changing themes
           if currentTheme.name:lower():find("catppuccin") then
             local ok, catppuccin = pcall(require, "catppuccin")
             if ok then
               -- Toggle transparent_background
               catppuccin.options.transparent_background = not catppuccin.options.transparent_background
               catppuccin.compile() -- Recompile with new settings
+              themery.setThemeByName(currentTheme.name)
             end
           else
             if _G.transparent_enabled then
               SetBGTransparent()
             end
+            _G.transparent_enabled = not _G.transparent_enabled
+            themery.setThemeByName(currentTheme.name)
           end
-          _G.transparent_enabled = not _G.transparent_enabled
-          themery.setThemeByName(currentTheme.name)
         end,
         desc = "Toggle Transparent BG (Themery)",
       },
