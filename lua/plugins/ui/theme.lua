@@ -94,6 +94,8 @@ return {
         function()
           local themery = require("themery")
           local currentTheme = themery.getCurrentTheme()
+          -- Toggle transparency for other colorschemes as well
+          ToggleTransparency()
 
           if currentTheme and currentTheme.name:lower():find("catppuccin") then
             local ok, catppuccin = pcall(require, "catppuccin")
