@@ -50,6 +50,7 @@ return {
     "zaldih/themery.nvim",
     lazy = false,
     opts = {
+      --TODO: fix inconsistent transparency when changing themes
       globalAfter = [[ _G.SetBGTransparentIfTransparentEnabled() ]],
       themes = {
         -- Kanagawa
@@ -106,34 +107,24 @@ return {
           local currentTheme = themery.getCurrentTheme()
 
           --TODO: fix inconsistent transparency when changing themes
-          if currentTheme and currentTheme.name:lower():find("catppuccin") then
+          if not currentTheme then
+            vim.notify("No theme to toggle transparency", vim.log.levels.ERROR)
+            return
+          end
+          if currentTheme.name:lower():find("catppuccin") then
             local ok, catppuccin = pcall(require, "catppuccin")
             if ok then
               -- Toggle transparent_background
               catppuccin.options.transparent_background = not catppuccin.options.transparent_background
               catppuccin.compile() -- Recompile with new settings
-              if currentTheme.colorscheme then
-                vim.cmd("colorscheme " .. currentTheme.colorscheme) -- Reapply current theme
-              elseif currentTheme then
-                themery.setThemeByName(currentTheme.name)
-              else
-                vim.notify(
-                  "[Themery] Cannot reapply theme: `colorscheme` is nil:\npick a recompiled catppuccin theme",
-                  vim.log.levels.WARN
-                )
-              end
             end
           else
             if _G.transparent_enabled then
               SetBGTransparent()
-            elseif currentTheme then
-              -- Properly reapply current Themery theme
-              themery.setThemeByName(currentTheme.name)
-            else
-              vim.notify("No theme to reload", vim.log.levels.ERROR)
             end
             _G.transparent_enabled = not _G.transparent_enabled
           end
+          themery.setThemeByName(currentTheme.name)
         end,
         desc = "Toggle Transparent BG (Themery)",
       },
