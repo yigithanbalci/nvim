@@ -16,10 +16,29 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
+local function save_transparency(enabled)
+  local path = vim.fn.stdpath("state") .. "/.transparency"
+  local file = io.open(path, "w")
+  if file then
+    file:write(enabled and "1" or "0")
+    file:close()
+  end
+end
+
+local function load_transparency()
+  local path = vim.fn.stdpath("state") .. "/.transparency"
+  local file = io.open(path, "r")
+  if file then
+    local val = file:read("*l")
+    file:close()
+    return val == "1"
+  end
+  return false
+end
+
 -- Apply transparency to all themes not only one
--- TODO: change this to vim.g and store in state dir
--- for re-opening nvim
-_G.transparent_enabled = _G.transparent_enabled or false
+vim.g.transparent_enabled = load_transparency()
+_G.transparent_enabled = vim.g.transparent_enabled
 
 function SetBGTransparent()
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -45,6 +64,7 @@ function ToggleTransparency()
     vim.cmd("colorscheme " .. vim.g.colors_name) -- reset to theme defaults
   end
   _G.transparent_enabled = not _G.transparent_enabled
+  save_transparency(_G.transparent_enabled)
 end
 
 return {
@@ -115,6 +135,7 @@ return {
             SetBGTransparent()
           end
           _G.transparent_enabled = not _G.transparent_enabled
+          save_transparency(_G.transparent_enabled)
           themery.setThemeByName(currentTheme.name)
         end,
         desc = "Toggle Transparent BG (Themery)",
