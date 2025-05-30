@@ -122,8 +122,8 @@ return {
             if _G.transparent_enabled then
               SetBGTransparent()
             end
-            _G.transparent_enabled = not _G.transparent_enabled
           end
+          _G.transparent_enabled = not _G.transparent_enabled
           themery.setThemeByName(currentTheme.name)
         end,
         desc = "Toggle Transparent BG (Themery)",
