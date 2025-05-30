@@ -37,8 +37,7 @@ local function load_transparency()
 end
 
 -- Apply transparency to all themes not only one
-vim.g.transparent_enabled = load_transparency()
-_G.transparent_enabled = vim.g.transparent_enabled
+_G.transparent_enabled = load_transparency()
 
 function SetBGTransparent()
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
