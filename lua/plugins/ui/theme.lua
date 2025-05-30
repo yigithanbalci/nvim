@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 _G.transparent_enabled = _G.transparent_enabled or false
 
 function ToggleTransparency()
-  if transparent_enabled then
+  if _G.transparent_enabled then
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -94,6 +94,7 @@ return {
           local themery = require("themery")
           local currentTheme = themery.getCurrentTheme()
 
+          --TODO: fix inconsistent transparency when changing themes
           if currentTheme and currentTheme.name:lower():find("catppuccin") then
             local ok, catppuccin = pcall(require, "catppuccin")
             if ok then
@@ -102,6 +103,8 @@ return {
               catppuccin.compile() -- Recompile with new settings
               if currentTheme.colorscheme then
                 vim.cmd("colorscheme " .. currentTheme.colorscheme) -- Reapply current theme
+              elseif currentTheme then
+                themery.setThemeByName(currentTheme.name)
               else
                 vim.notify(
                   "[Themery] Cannot reapply theme: `colorscheme` is nil:\npick a recompiled catppuccin theme",
@@ -110,7 +113,7 @@ return {
               end
             end
           else
-            if transparent_enabled then
+            if _G.transparent_enabled then
               vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
               vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
               vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
