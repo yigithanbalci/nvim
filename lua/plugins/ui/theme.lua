@@ -19,16 +19,26 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- Apply transparency to all themes not only one
 _G.transparent_enabled = _G.transparent_enabled or false
 
+function SetBGTransparent()
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+  vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+  vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
+  vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+end
+
+_G.SetBGTransparentIfTransparentEnabled = function()
+  if _G.transparent_enabled then
+    SetBGTransparent()
+  end
+end
+
 function ToggleTransparency()
   if _G.transparent_enabled then
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-    vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-    vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
-    vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+    SetBGTransparent()
   else
     vim.cmd("colorscheme " .. vim.g.colors_name) -- reset to theme defaults
   end
@@ -40,6 +50,7 @@ return {
     "zaldih/themery.nvim",
     lazy = false,
     opts = {
+      globalAfter = [[ _G.SetBGTransparentIfTransparentEnabled() ]],
       themes = {
         -- Kanagawa
         { name = "Kanagawa Day", colorscheme = "kanagawa-lotus" },
@@ -114,14 +125,7 @@ return {
             end
           else
             if _G.transparent_enabled then
-              vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-              vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-              vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-              vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-              vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-              vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-              vim.api.nvim_set_hl(0, "Pmenu", { bg = "none" })
-              vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+              SetBGTransparent()
             elseif currentTheme then
               -- Properly reapply current Themery theme
               themery.setThemeByName(currentTheme.name)
