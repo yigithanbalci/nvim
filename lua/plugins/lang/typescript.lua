@@ -82,6 +82,11 @@ return {
               format = {
                 enable = true,
               },
+              tsserver = {
+                experimental = {
+                  enableProjectDiagnostics = true,
+                },
+              },
             },
           },
 
