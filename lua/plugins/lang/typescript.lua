@@ -60,7 +60,6 @@ return {
             vtsls = {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
-              enableProjectDiagnostics = true,
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
@@ -71,6 +70,11 @@ return {
               updateImportsOnFileMove = { enabled = "always" },
               suggest = {
                 completeFunctionCalls = true,
+              },
+              tsserver = {
+                experimental = {
+                  enableProjectDiagnostics = true,
+                },
               },
               inlayHints = {
                 enumMemberValues = { enabled = true },
