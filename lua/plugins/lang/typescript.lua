@@ -60,6 +60,7 @@ return {
             vtsls = {
               enableMoveToFileCodeAction = true,
               autoUseWorkspaceTsdk = true,
+              enableProjectDiagnostics = true,
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
