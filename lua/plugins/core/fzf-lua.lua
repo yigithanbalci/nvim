@@ -22,7 +22,7 @@ elseif vim.g.my_config.search == "fzf-lua" then
 
         -- Append --multiline if not already present
         if not rg_opts:match("%-%-multiline") then
-          rg_opts = rg_opts .. " --multiline"
+          rg_opts = rg_opts .. " --pcre2 --multiline --multiline-dotall"
         end
 
         opts.grep.rg_opts = vim.trim(rg_opts)
