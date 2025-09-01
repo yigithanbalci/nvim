@@ -177,6 +177,6 @@ vim.g.my_config = {
     },
   },
   extras = {
-    leetcode = true,
+    leetcode = false,
   },
 }
