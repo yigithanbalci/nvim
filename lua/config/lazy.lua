@@ -34,6 +34,7 @@ require("lazy").setup({
     -- import/override with your plugins
     -- { import = "plugins" },
     { import = "plugins/core" },
+    { import = "plugins/extras" },
     { import = "plugins/lang" },
     { import = "plugins/ui" },
     { import = "plugins/util" },

@@ -176,4 +176,7 @@ vim.g.my_config = {
       enabled = true,
     },
   },
+  extras = {
+    leetcode = true,
+  },
 }
