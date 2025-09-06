@@ -150,7 +150,7 @@ vim.g.my_config = {
       enabled = true,
     },
     ocaml = {
-      enabled = true,
+      enabled = false,
     },
     python = {
       enabled = true,
