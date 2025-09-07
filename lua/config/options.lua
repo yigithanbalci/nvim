@@ -144,7 +144,7 @@ vim.g.my_config = {
       config = "flutter-tools",
     },
     java = {
-      enabled = false,
+      enabled = true,
     },
     markdown = {
       enabled = true,
