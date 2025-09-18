@@ -32,9 +32,12 @@ return {
             gap = 1,
             padding = 1,
           },
-          { pane = 2, icon = [[
+          {
+            pane = 2,
+            icon = [[
 
-          ]] },
+          ]]
+          },
           {
             pane = 2,
             icon = " ",
@@ -64,7 +67,9 @@ return {
                 cmd = "gh issue list -L 3",
                 key = "i",
                 action = function()
-                  vim.fn.jobstart("gh issue list --web", { detach = true })
+                  vim.schedule(function()
+                    pcall(vim.fn.jobstart, "gh issue list --web", { detach = true })
+                  end)
                 end,
                 icon = " ",
                 height = 7,
@@ -75,7 +80,9 @@ return {
                 cmd = "gh pr list -L 3",
                 key = "P",
                 action = function()
-                  vim.fn.jobstart("gh pr list --web", { detach = true })
+                  vim.schedule(function()
+                    pcall(vim.fn.jobstart, "gh pr list --web", { detach = true })
+                  end)
                 end,
                 height = 7,
               },
