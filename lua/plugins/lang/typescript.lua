@@ -14,7 +14,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
@@ -81,6 +81,11 @@ return {
               },
               format = {
                 enable = true,
+              },
+              tsserver = {
+                experimental = {
+                  enableProjectDiagnostics = true,
+                },
               },
             },
           },

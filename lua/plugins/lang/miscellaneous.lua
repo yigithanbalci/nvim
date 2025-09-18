@@ -20,7 +20,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
@@ -55,6 +55,11 @@ return {
       },
     },
     opts = {
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
       formatters_by_ft = {
         fish = { "fish_indent" },
         sh = { "shfmt" },

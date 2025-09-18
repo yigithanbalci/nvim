@@ -117,7 +117,7 @@ opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  opt.foldexpr = "v:lua.require'lazyvim.util'.treesitter.foldexpr()"
   opt.foldmethod = "expr"
   opt.foldtext = ""
 else
@@ -144,13 +144,13 @@ vim.g.my_config = {
       config = "flutter-tools",
     },
     java = {
-      enabled = false,
+      enabled = true,
     },
     markdown = {
       enabled = true,
     },
     ocaml = {
-      enabled = true,
+      enabled = false,
     },
     python = {
       enabled = true,
@@ -175,5 +175,8 @@ vim.g.my_config = {
     copilot = {
       enabled = true,
     },
+  },
+  extras = {
+    leetcode = true,
   },
 }
