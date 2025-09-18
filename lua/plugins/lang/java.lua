@@ -48,16 +48,16 @@ return {
     opts = function()
       local cmd = { vim.fn.exepath("jdtls") }
       if LazyVim.has("mason.nvim") then
-        local mason_registry = require("mason-registry")
-        local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
+        local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
-      local lspconfig = require("lspconfig")
       return {
         -- How to find the root dir for a given filename. The default comes from
         -- lspconfig which provides a function specifically for java projects.
         -- root_dir = LazyVim.lsp.get_raw_config("jdtls").default_config.root_dir,
-        root_dir = lspconfig.util.root_pattern("pom.xml", "build.gradle", ".git"),
+        root_dir = function(path)
+          return vim.fs.root(path, vim.lsp.config.jdtls.root_markers)
+        end,
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)
@@ -119,17 +119,13 @@ return {
       if LazyVim.has("mason.nvim") then
         local mason_registry = require("mason-registry")
         if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
-          local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
-          local java_dbg_path = java_dbg_pkg:get_install_path()
           local jar_patterns = {
-            java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
+            vim.fn.expand("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar"),
           }
           -- java-test also depends on java-debug-adapter.
           if opts.test and mason_registry.is_installed("java-test") then
-            local java_test_pkg = mason_registry.get_package("java-test")
-            local java_test_path = java_test_pkg:get_install_path()
             vim.list_extend(jar_patterns, {
-              java_test_path .. "/extension/server/*.jar",
+              vim.fn.expand("$MASON/share/java-test/*.jar"),
             })
           end
           for _, jar_pattern in ipairs(jar_patterns) do
@@ -179,12 +175,12 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { "<leader>cx", group = "extract" },
+                { "<leader>cx",  group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
-                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
+                { "<leader>cxc", require("jdtls").extract_constant,     desc = "Extract Constant" },
                 { "<leader>cgs", require("jdtls").super_implementation, desc = "Goto Super" },
-                { "<leader>cgS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
-                { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
+                { "<leader>cgS", require("jdtls.tests").goto_subjects,  desc = "Goto Subjects" },
+                { "<leader>co",  require("jdtls").organize_imports,     desc = "Organize Imports" },
               },
             })
             wk.add({
@@ -226,7 +222,7 @@ return {
                     {
                       mode = "n",
                       buffer = args.buf,
-                      { "<leader>t", group = "test" },
+                      { "<leader>t",  group = "test" },
                       {
                         "<leader>tt",
                         function()
@@ -271,7 +267,7 @@ return {
     ft = { "java", "yaml", "jproperties" },
     dependencies = {
       "mfussenegger/nvim-jdtls", -- or nvim-java, nvim-lspconfig
-      "ibhagwan/fzf-lua", -- optional, for UI features like symbol picking. Other pickers (e.g., telescope.nvim) can also be used.
+      "ibhagwan/fzf-lua",        -- optional, for UI features like symbol picking. Other pickers (e.g., telescope.nvim) can also be used.
     },
     ---@type bootls.Config
     opts = {},

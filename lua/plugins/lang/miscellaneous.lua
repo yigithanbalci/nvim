@@ -37,7 +37,9 @@ return {
         -- make formatter options work with .config dir or pass through lspconfig
         taplo = {
           filetypes = { "toml" },
-          root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+          root_dir = function(path)
+            return vim.fs.root(path, { "*.toml", ".git" })
+          end,
         },
       },
     },
