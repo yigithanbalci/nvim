@@ -5,6 +5,7 @@ function LineNumberColors()
   vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff966c", bold = true })
   vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#FB508F", bold = true })
 end
+
 -- Apply custom highlights every time a colorscheme is loaded
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
@@ -275,7 +276,7 @@ return {
   {
     "ayu-theme/ayu-vim",
     lazy = true,
-    config = function(_, opts) end,
+    opts = {},
   },
   {
     "ellisonleao/gruvbox.nvim",
