@@ -23,6 +23,7 @@ end
 local function initialize_configs()
   if not default_opts then
     default_opts = deepcopy_config(require("dapui.config"))
+    default_opts.floating.mappings.close = { "q", "<Esc>" }
   end
   if not minimal_opts then
     minimal_opts = deepcopy_config(require("dapui.config"))
@@ -78,10 +79,35 @@ return {
           {
             "<leader>de",
             function()
+              initialize_configs()
               require("dapui").eval(nil, { enter = true })
             end,
             desc = "Evaluate under cursor",
             mode = { "n", "v" },
+          },
+          {
+            "<leader>dfb",
+            function()
+              initialize_configs()
+              require("dapui").float_element("breakpoints", { enter = true, width = 60, height = 20 })
+            end,
+            desc = "(Floating)Breakpoints",
+          },
+          {
+            "<leader>dfs",
+            function()
+              initialize_configs()
+              require("dapui").float_element("stacks", { enter = true, width = 60, height = 20 })
+            end,
+            desc = "(Floating)Stacks",
+          },
+          {
+            "<leader>dfr",
+            function()
+              initialize_configs()
+              require("dapui").float_element("repl", { enter = true, width = 80, height = 20 })
+            end,
+            desc = "(Floating)Repl",
           },
         },
         opts = {},
