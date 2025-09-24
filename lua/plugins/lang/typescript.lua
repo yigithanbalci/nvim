@@ -218,7 +218,9 @@ return {
         -----------------------------------------------
         eslint = function()
           local function get_client(buf)
-            return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+            local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+            local clients = get_clients({ name = "eslint", bufnr = buf })
+            return clients and clients[1] or nil
           end
 
           local formatter = LazyVim.lsp.formatter({
