@@ -1,15 +1,9 @@
 if not vim.g.my_config.langs.ocaml.enabled then
   return {}
 end
+--TODO yigithanbalci 08-10-2025: Investigate that the below configs are needed or not
+--for now it seems they are not included in lazyvim
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "ocaml",
-      },
-    },
-  },
   {
     "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
