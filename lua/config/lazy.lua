@@ -33,6 +33,7 @@ local function get_lazy_spec()
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     -- Linting and formatting (TypeScript)
+    --TODO: make these enabled when typescript is enabled
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
   }
