@@ -42,7 +42,7 @@ local function get_lazy_spec()
     clangd = "lazyvim.plugins.extras.lang.clangd",
     cmake = "lazyvim.plugins.extras.lang.cmake",
     go = "lazyvim.plugins.extras.lang.go",
-    flutter = "lazyvim.plugins.extras.lang.flutter",
+    -- flutter = "lazyvim.plugins.extras.lang.flutter", -- Not Supported now
     java = "lazyvim.plugins.extras.lang.java",
     markdown = "lazyvim.plugins.extras.lang.markdown",
     ocaml = "lazyvim.plugins.extras.lang.ocaml",
