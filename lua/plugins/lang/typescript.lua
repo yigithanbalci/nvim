@@ -3,13 +3,14 @@ if not vim.g.my_config.langs.typescript.enabled then
 end
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-neotest/neotest",
+    dependencies = { "nvim-neotest/neotest-jest" },
     opts = {
-      ensure_installed = {
-        "javascript",
-        "jsdoc",
-        "tsx",
-        "typescript",
+      adapters = {
+        ["neotest-jest"] = {
+          jestCommand = "npm test --detectOpenHandles",
+          JestConfigFile = "custom.jest.config.ts",
+        },
       },
     },
   },
@@ -17,14 +18,6 @@ return {
     --NOTE: double tap diagnostic hover (K) to enter the opened popup
     "neovim/nvim-lspconfig",
     opts = {
-      servers = {
-        eslint = {
-          settings = {
-            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectories = { mode = "auto" },
-          },
-        },
-      },
       setup = {
         eslint = function()
           local function get_client(buf)
@@ -69,18 +62,6 @@ return {
           -- register the formatter with LazyVim
           LazyVim.format.register(formatter)
         end,
-      },
-    },
-  },
-  {
-    "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/neotest-jest" },
-    opts = {
-      adapters = {
-        ["neotest-jest"] = {
-          jestCommand = "npm test --detectOpenHandles",
-          JestConfigFile = "custom.jest.config.ts",
-        },
       },
     },
   },
