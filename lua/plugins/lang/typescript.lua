@@ -15,57 +15,6 @@ return {
     },
   },
   {
-    --NOTE: double tap diagnostic hover (K) to enter the opened popup
-    "neovim/nvim-lspconfig",
-    opts = {
-      setup = {
-        eslint = function()
-          local function get_client(buf)
-            local clients = vim.lsp.get_clients({ name = "eslint", bufnr = buf })
-            return clients[1]
-          end
-
-          local formatter = LazyVim.lsp.formatter({
-            name = "eslint: lsp",
-            primary = false,
-            priority = 200,
-            filter = "eslint",
-          })
-          -- Add Eslint and use it for formatting
-          -- https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
-          -- require("lazyvim.util").lsp.on_attach(function(client)
-          --   if client.name == "eslint" then
-          --     client.server_capabilities.documentFormattingProvider = true
-          --   elseif client.name == "tsserver" then
-          --     client.server_capabilities.documentFormattingProvider = false
-          --   end
-          -- end)
-
-          -- Use EslintFixAll on Neovim < 0.10.0
-          if not pcall(require, "vim.lsp._dynamic") then
-            formatter.name = "eslint: EslintFixAll"
-            formatter.sources = function(buf)
-              local client = get_client(buf)
-              return client and { "eslint" } or {}
-            end
-            formatter.format = function(buf)
-              local client = get_client(buf)
-              if client then
-                local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-                if #diag > 0 then
-                  vim.cmd("EslintFixAll")
-                end
-              end
-            end
-          end
-
-          -- register the formatter with LazyVim
-          LazyVim.format.register(formatter)
-        end,
-      },
-    },
-  },
-  {
     "mfussenegger/nvim-dap",
     optional = true,
     opts = function(_, opts)
