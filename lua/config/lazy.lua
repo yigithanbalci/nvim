@@ -33,9 +33,6 @@ local function get_lazy_spec()
     { import = "lazyvim.plugins.extras.editor.mini-files" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     -- Linting and formatting (TypeScript)
-    --TODO: make these enabled when typescript is enabled
-    { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
   }
 
   -- Define mapping between your config and LazyVim extras
@@ -57,6 +54,30 @@ local function get_lazy_spec()
   for lang, info in pairs(cfg.langs or {}) do
     if info.enabled and lang_map[lang] then
       table.insert(spec, { import = lang_map[lang] })
+    end
+  end
+
+  -- Define mapping for linters
+  local linter_map = {
+    eslint = "lazyvim.plugins.extras.linting.eslint",
+  }
+
+  -- Dynamically include enabled linter extras
+  for linter, info in pairs(cfg.linters or {}) do
+    if info.enabled and linter_map[linter] then
+      table.insert(spec, { import = linter_map[linter] })
+    end
+  end
+
+  -- Define mapping for formatters
+  local formatter_map = {
+    prettier = "lazyvim.plugins.extras.formatting.prettier",
+  }
+
+  -- Dynamically include enabled formatter extras
+  for formatter, info in pairs(cfg.formatters or {}) do
+    if info.enabled and formatter_map[formatter] then
+      table.insert(spec, { import = formatter_map[formatter] })
     end
   end
 

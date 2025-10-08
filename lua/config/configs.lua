@@ -41,6 +41,16 @@ vim.g.my_config = {
       enabled = true,
     },
   },
+  linters = {
+    eslint = {
+      enabled = true,
+    },
+  },
+  formatters = {
+    prettier = {
+      enabled = true,
+    },
+  },
   ai = {
     avante = {
       enabled = false,
