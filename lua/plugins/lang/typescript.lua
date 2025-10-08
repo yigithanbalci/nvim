@@ -1,6 +1,8 @@
 if not vim.g.my_config.langs.typescript.enabled then
   return {}
 end
+--TODO yigithanbalci 08-10-2025: backup full config & fallback to using lazyvim directly
+--just add addititional settings in config files, it causes some problems
 return {
   {
     "nvim-neotest/neotest",
