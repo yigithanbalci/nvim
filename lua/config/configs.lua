@@ -15,20 +15,20 @@ vim.g.my_config = {
   },
   langs = {
     clangd = {
-      enabled = true,
+      enabled = false,
     },
     cmake = {
-      enabled = true,
+      enabled = false,
     },
     go = {
-      enabled = true,
+      enabled = false,
     },
     flutter = {
-      enabled = true,
+      enabled = false,
       config = "flutter-tools",
     },
     java = {
-      enabled = true,
+      enabled = false,
     },
     json = {
       enabled = true,
@@ -45,7 +45,7 @@ vim.g.my_config = {
       ruff = "ruff",
     },
     rust = {
-      enabled = true,
+      enabled = false,
       diagnostics = "rust-analyzer",
     },
     sql = {
@@ -58,7 +58,7 @@ vim.g.my_config = {
       enabled = true,
     },
     zig = {
-      enabled = true,
+      enabled = false,
     },
   },
   linters = {
@@ -80,7 +80,7 @@ vim.g.my_config = {
     },
   },
   extras = {
-    leetcode = true,
+    leetcode = false,
   },
 }
 
