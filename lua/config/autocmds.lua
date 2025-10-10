@@ -8,8 +8,8 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- TypeScript - Remove unused imports on save
--- --TODO yigithanbalci 13-03-2025: investigate wtf is happening with this for
--- removeUnusedImports & organizeImports
+-- TODO: if there will be an E Z solution for format imports for any language
+-- change this later on
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = vim.api.nvim_create_augroup("ts_imports", { clear = true }),
   pattern = { "*.tsx,*.ts" },
@@ -41,16 +41,5 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     --     diagnostics = {},
     --   },
     -- })
-  end,
-})
-
--- AutoFormat for Nvim 0.11+ & LazyVim 15+
--- For whatever reason it was not working
--- TODO: AutoSave is somewhat too slow compared to LazyVim version below 15
--- and old plugins, if it continues try to fix it...
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    vim.lsp.buf.format({ async = false })
   end,
 })

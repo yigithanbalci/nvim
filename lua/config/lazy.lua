@@ -1,7 +1,3 @@
---TODO: update dadbod ui settings, especially tree
---TODO: fix git-worktree plugin
---TODO: fix neotest debug for jest
---TODO: refactor dir & structure
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -19,26 +15,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- fundamental plugins
-    { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.test.core" },
-    -- utilities
-    { import = "lazyvim.plugins.extras.editor.mini-files" },
-    { import = "lazyvim.plugins.extras.coding.mini-surround" },
-    -- Linting and formatting (TypeScript)
-    { import = "lazyvim.plugins.extras.linting.eslint" },
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
-    -- import/override with your plugins
-    -- { import = "plugins" },
-    { import = "plugins/core" },
-    { import = "plugins/extras" },
-    { import = "plugins/lang" },
-    { import = "plugins/ui" },
-    { import = "plugins/util" },
-  },
+  spec = require("config.configs").get_lazy_spec(),
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
