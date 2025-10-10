@@ -10,9 +10,9 @@ return {
       },
     },
     keys = {
-      --TODO: false didn't work here
+      --NOTE: false didn't work here, so I used normal!
       { "<S-h>", '<Cmd>execute "normal! H"<CR>', { desc = "Make default H movement" } },
-      { "<S-l>", '<Cmd>execute "normal! L"<CR>', { desc = "Make default H movement" } },
+      { "<S-l>", '<Cmd>execute "normal! L"<CR>', { desc = "Make default L movement" } },
       { "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer (default no bufferline)" } },
       { "]b", "<cmd>bnext<cr>", { desc = "Next buffer (default no bufferline)" } },
     },

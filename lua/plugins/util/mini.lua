@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.files",
     opts = {
       file = {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
@@ -20,7 +20,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     opts = function(_, opts)
       --NOTE yigithanbalci 17-03-2025: below configs to make mini.surround act like vim-surround
       opts.custom_surroundings = {

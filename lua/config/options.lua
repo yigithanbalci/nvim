@@ -117,7 +117,7 @@ opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  opt.foldexpr = "v:lua.require'lazyvim.util'.treesitter.foldexpr()"
   opt.foldmethod = "expr"
   opt.foldtext = ""
 else
@@ -127,61 +127,3 @@ end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
-
--- Enable Language Plugins that might not be used at all for some configuration (e.g. work)
-vim.g.my_config = {
-  -- The picker is either fzf-lua or telescope
-  search = "fzf-lua",
-  theme = {
-    enabled = true,
-    scheme = {
-      name = "tokyonight",
-      style = "tokyonight-moon",
-      background = "dark",
-    },
-  },
-  langs = {
-    clang = {
-      enabled = true,
-    },
-    go = {
-      enabled = false,
-    },
-    flutter = {
-      enabled = false,
-      config = "flutter-tools",
-    },
-    java = {
-      enabled = false,
-    },
-    markdown = {
-      enabled = true,
-    },
-    ocaml = {
-      enabled = false,
-    },
-    python = {
-      enabled = false,
-      lsp = "pyright",
-      ruff = "ruff",
-    },
-    rust = {
-      enabled = false,
-      diagnostics = "rust-analyzer",
-    },
-    typescript = {
-      enabled = true,
-    },
-    zig = {
-      enabled = false,
-    },
-  },
-  ai = {
-    avante = {
-      enabled = false,
-    },
-    copilot = {
-      enabled = true,
-    },
-  },
-}

@@ -3,15 +3,7 @@ if not vim.g.my_config.langs.ocaml.enabled then
 end
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "ocaml",
-      },
-    },
-  },
-  {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
