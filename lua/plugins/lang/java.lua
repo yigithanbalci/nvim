@@ -1,4 +1,3 @@
---TODO: update this file for java projects
 if not vim.g.my_config.langs.java.enabled then
   return {}
 end
