@@ -1,7 +1,5 @@
 --TODO: update dadbod ui settings, especially tree
 --TODO: fix git-worktree plugin
---TODO: fix neotest debug for jest
---TODO: refactor dir & structure
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
