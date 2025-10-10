@@ -5,6 +5,14 @@ local M = {}
 vim.g.my_config = {
   -- The picker is either fzf-lua or telescope
   search = "fzf-lua",
+  codings = {
+    blink = {
+      enabled = true,
+    },
+    luasnip = {
+      enabled = true,
+    },
+  },
   langs = {
     clangd = {
       enabled = true,
@@ -103,6 +111,17 @@ function M.get_lazy_spec()
   for lang, info in pairs(cfg.langs or {}) do
     if info.enabled and lang_map[lang] then
       table.insert(spec, { import = lang_map[lang] })
+    end
+  end
+
+  local coding_map = {
+    blink = "lazyvim.plugins.extras.coding.blink",
+    luasnip = "lazyvim.plugins.extras.coding.luasnip",
+  }
+
+  for coding, info in pairs(cfg.codings or {}) do
+    if info.enabled and coding_map[coding] then
+      table.insert(spec, { import = coding_map[coding] })
     end
   end
 
