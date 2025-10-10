@@ -8,8 +8,8 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- TypeScript - Remove unused imports on save
--- --TODO yigithanbalci 13-03-2025: investigate wtf is happening with this for
--- removeUnusedImports & organizeImports
+-- NOTE: if there will be an E Z solution for format imports for any language
+-- change this later on
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = vim.api.nvim_create_augroup("ts_imports", { clear = true }),
   pattern = { "*.tsx,*.ts" },
