@@ -48,6 +48,9 @@ vim.g.my_config = {
       enabled = true,
       diagnostics = "rust-analyzer",
     },
+    sql = {
+      enabled = true,
+    },
     toml = {
       enabled = true,
     },
@@ -103,8 +106,9 @@ function M.get_lazy_spec()
     ocaml = "lazyvim.plugins.extras.lang.ocaml",
     python = "lazyvim.plugins.extras.lang.python",
     rust = "lazyvim.plugins.extras.lang.rust",
-    typescript = "lazyvim.plugins.extras.lang.typescript",
+    sql = "lazyvim.plugins.extras.lang.sql",
     toml = "lazyvim.plugins.extras.lang.toml",
+    typescript = "lazyvim.plugins.extras.lang.typescript",
     zig = "lazyvim.plugins.extras.lang.zig",
   }
 
