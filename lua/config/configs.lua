@@ -81,6 +81,7 @@ vim.g.my_config = {
   },
   extras = {
     leetcode = false,
+    sonarlint = true,
   },
 }
 
