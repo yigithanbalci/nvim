@@ -8,7 +8,7 @@ return {
     opts = {
       adapters = {
         ["neotest-jest"] = {
-          jestCommand = "npm test --detectOpenHandles",
+          jestCommand = "npm test -- --detectOpenHandles",
           JestConfigFile = "custom.jest.config.ts",
         },
       },
