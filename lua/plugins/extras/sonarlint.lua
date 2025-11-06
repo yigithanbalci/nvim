@@ -56,15 +56,7 @@ return {
           "typescriptreact",
         },
         settings = {
-          sonarlint = {
-            rules = {
-              ["typescript:S6019"] = { level = "on" },
-              ["typescript:S6035"] = { level = "on" },
-              ["typescript:S2933"] = { level = "on" },
-              ["typescript:S1607"] = { level = "on" },
-              ["typescript:S6079"] = { level = "on" },
-            },
-          },
+          sonarlint = {},
         },
       })
     end,
