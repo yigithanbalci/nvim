@@ -1,3 +1,5 @@
+-- TODO yigithanbalci 2025-11-26: minimal mode is buggy
+-- fix some time
 local minimal_mode = true
 local minimal_opts
 local default_opts
