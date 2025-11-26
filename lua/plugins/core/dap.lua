@@ -1,4 +1,6 @@
-local minimal_mode = true
+-- TODO yigithanbalciacc 2025-11-26: minimal mode breaks things
+-- make a better config & fix it
+local minimal_mode = false
 local minimal_opts
 local default_opts
 
