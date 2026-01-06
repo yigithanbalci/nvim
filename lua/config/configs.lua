@@ -83,6 +83,9 @@ vim.g.my_config = {
     leetcode = true,
     sonarlint = false,
   },
+  git = {
+    fugitive = false,
+  },
 }
 
 function M.get_lazy_spec()
