@@ -49,6 +49,39 @@ local function initialize_configs()
   end
 end
 
+vim.api.nvim_create_augroup("DapGroup", { clear = true })
+
+local function navigate(args)
+  local buffer = args.buf
+
+  local wid = nil
+  local win_ids = vim.api.nvim_list_wins() -- Get all window IDs
+  for _, win_id in ipairs(win_ids) do
+    local win_bufnr = vim.api.nvim_win_get_buf(win_id)
+    if win_bufnr == buffer then
+      wid = win_id
+    end
+  end
+
+  if wid == nil then
+    return
+  end
+
+  vim.schedule(function()
+    if vim.api.nvim_win_is_valid(wid) then
+      vim.api.nvim_set_current_win(wid)
+    end
+  end)
+end
+
+local function create_nav_options(name)
+  return {
+    group = "DapGroup",
+    pattern = string.format("*%s*", name),
+    callback = navigate,
+  }
+end
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -56,32 +89,30 @@ return {
     dependencies = {
       {
         "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
         keys = {
           {
             "<leader>du",
             function()
-              initialize_configs()
-              local dapui = require("dapui")
-              dapui.toggle({ reset = true })
+              -- Ensure configs are initialized before toggling
+              require("dapui").toggle({ reset = true })
             end,
             desc = "(Toggle)Dap UI",
           },
           {
             "<leader>dT",
             function()
-              minimal_mode = not minimal_mode
-              initialize_configs()
               local dapui = require("dapui")
-              dapui.setup(minimal_mode and minimal_opts or default_opts)
-              --NOTE yigithanbalci 22-09-2025: toggle or open/clode does not work properly
-              --maybe investigate later
+              -- Toggles between minimal and default by re-running setup
+              -- Assuming minimal_mode/opts are defined in your scope or globals
+              _G.minimal_mode = not _G.minimal_mode
+              dapui.setup(_G.minimal_mode and _G.minimal_opts or _G.default_opts)
             end,
             desc = "(Toggle) DAP UI mininal/default",
           },
           {
             "<leader>de",
             function()
-              initialize_configs()
               require("dapui").eval(nil, { enter = true })
             end,
             desc = "Evaluate under cursor",
@@ -90,7 +121,6 @@ return {
           {
             "<leader>dfb",
             function()
-              initialize_configs()
               require("dapui").float_element("breakpoints", { enter = true, width = 60, height = 20 })
             end,
             desc = "(Floating)Breakpoints",
@@ -98,7 +128,6 @@ return {
           {
             "<leader>dfs",
             function()
-              initialize_configs()
               require("dapui").float_element("stacks", { enter = true, width = 60, height = 20 })
             end,
             desc = "(Floating)Stacks",
@@ -106,13 +135,56 @@ return {
           {
             "<leader>dfr",
             function()
-              initialize_configs()
               require("dapui").float_element("repl", { enter = true, width = 80, height = 20 })
             end,
             desc = "(Floating)Repl",
           },
         },
-        opts = {},
+        config = function()
+          local dap = require("dap")
+          local dapui = require("dapui")
+
+          -- 1. Standard Setup (Replaces the buggy custom layout loop)
+          dapui.setup({
+            -- Add any specific options here if needed, otherwise defaults are used
+          })
+
+          -- 2. The Navigation Options from Block 2
+          -- Note: Ensure `create_nav_options` is defined in your global scope or utils
+          -- I added a check to prevent errors if the function is missing
+          if type(create_nav_options) == "function" then
+            -- Apply to REPL
+            vim.api.nvim_create_autocmd("BufWinEnter", create_nav_options("dap-repl"))
+            -- Apply to Watches
+            vim.api.nvim_create_autocmd("BufWinEnter", create_nav_options("DAP Watches"))
+            -- You might want to add others here (e.g., Stacks, Breakpoints)
+            -- vim.api.nvim_create_autocmd("BufWinEnter", create_nav_options("DAP Stacks"))
+          end
+
+          -- 3. Console/Repl Wrapping
+          vim.api.nvim_create_autocmd("BufEnter", {
+            group = vim.api.nvim_create_augroup("DapGroup", { clear = true }),
+            pattern = "*dap-repl*",
+            callback = function()
+              vim.wo.wrap = true
+            end,
+          })
+
+          -- 4. Listeners (Auto-close UI when debug ends)
+          dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+          end
+          dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+          end
+
+          -- 5. Send Console Output to DAP UI
+          dap.listeners.after.event_output.dapui_config = function(_, body)
+            if body.category == "console" then
+              dapui.eval(body.output)
+            end
+          end
+        end,
       },
     },
     keys = {
