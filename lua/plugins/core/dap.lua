@@ -1,5 +1,8 @@
 -- TODO yigithanbalci 2025-11-26: minimal mode is buggy
 -- fix some time
+-- debugger evaluate expression is buggy
+-- there might be some update missing or something below is
+-- creating that bug
 local minimal_mode = true
 local minimal_opts
 local default_opts
