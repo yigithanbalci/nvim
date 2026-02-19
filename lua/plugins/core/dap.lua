@@ -5,6 +5,23 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        keys = {
+          -- NOTE yigithanbalciacc 2026-02-19: Evaluate and immediately enter pop-up
+          {
+            "<leader>de",
+            function()
+              require("dapui").eval(nil, { enter = true })
+            end,
+            desc = "Evaluate under cursor",
+            mode = { "n", "v" },
+          },
+        },
+      },
+    },
     keys = {
       {
         "<F1>",
