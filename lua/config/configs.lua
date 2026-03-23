@@ -75,8 +75,11 @@ vim.g.my_config = {
     avante = {
       enabled = false,
     },
-    copilot = {
+    claude_code = {
       enabled = true,
+    },
+    copilot = {
+      enabled = false,
     },
   },
   extras = {
@@ -154,6 +157,7 @@ function M.get_lazy_spec()
   end
 
   local ai_map = {
+    claude_code = "lazyvim.plugins.extras.ai.claudecode",
     copilot = "lazyvim.plugins.extras.ai.copilot",
     avante = "lazyvim.plugins.extras.ai.avante",
   }
