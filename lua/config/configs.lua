@@ -81,8 +81,8 @@ vim.g.my_config = {
     copilot = {
       enabled = false,
     },
-    ninety_nine = {
-      enabled = true,
+    _99 = {
+      enabled = false,
     },
   },
   extras = {
