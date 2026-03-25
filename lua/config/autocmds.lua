@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.tsx", "*.ts" },
   callback = function()
     ts_lsp_action_sync("source.addMissingImports.ts")
-    ts_lsp_action_sync("source.removeUnusedImports.ts")
+    ts_lsp_action_sync("source.removeUnused.ts")
     ts_lsp_action_sync("source.organizeImports.ts")
   end,
 })
