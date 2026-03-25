@@ -21,10 +21,15 @@ local function ts_lsp_action_sync(action, timeout)
     return
   end
 
-  local params = vim.lsp.util.make_range_params(0, clients[1].offset_encoding)
-  params.context = {
-    only = { action },
-    diagnostics = {},
+  local client = clients[1]
+  ---@type lsp.CodeActionParams
+  local params = {
+    textDocument = vim.lsp.util.make_text_document_params(bufnr),
+    range = vim.lsp.util.make_range_params(0, client.offset_encoding).range,
+    context = {
+      only = { action },
+      diagnostics = {},
+    },
   }
 
   local results = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, timeout)
@@ -35,9 +40,9 @@ local function ts_lsp_action_sync(action, timeout)
   for _, res in pairs(results) do
     for _, r in pairs(res.result or {}) do
       if r.edit then
-        vim.lsp.util.apply_workspace_edit(r.edit, clients[1].offset_encoding)
+        vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
       elseif r.command then
-        vim.lsp.buf.execute_command(r.command)
+        client:exec_cmd(r.command, { bufnr = bufnr })
       end
     end
   end
