@@ -1,5 +1,3 @@
--- TODO yigithanbalciacc 2025-11-05: should we move it to ts?
--- since this config is for ts?
 if not vim.g.my_config.extras.sonarlint then
   return {}
 end

@@ -81,6 +81,9 @@ vim.g.my_config = {
     copilot = {
       enabled = false,
     },
+    _99 = {
+      enabled = false,
+    },
   },
   extras = {
     leetcode = true,
