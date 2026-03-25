@@ -39,11 +39,21 @@ local function ts_lsp_action_sync(action, timeout)
 
   for _, res in pairs(results) do
     for _, r in pairs(res.result or {}) do
+      -- Some LSP servers return actions that need resolving first
+      if not r.edit and not r.command and client:supports_method("codeAction/resolve") then
+        r = client:request_sync("codeAction/resolve", r, timeout, bufnr)
+        r = r and r.result
+        if not r then
+          goto continue
+        end
+      end
       if r.edit then
         vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
-      elseif r.command then
+      end
+      if r.command then
         client:exec_cmd(r.command, { bufnr = bufnr })
       end
+      ::continue::
     end
   end
 end
@@ -53,7 +63,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*.tsx", "*.ts" },
   callback = function()
     ts_lsp_action_sync("source.addMissingImports.ts")
-    ts_lsp_action_sync("source.removeUnused.ts")
-    ts_lsp_action_sync("source.organizeImports.ts")
+    ts_lsp_action_sync("source.organizeImports")
   end,
 })
