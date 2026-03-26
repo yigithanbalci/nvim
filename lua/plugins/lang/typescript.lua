@@ -4,6 +4,7 @@ end
 return {
   {
     "nvim-neotest/neotest",
+    commit = "b059824dc3c9422ccf6cfdbd7349df9f65389d39", -- Lock to the working version
     dependencies = { "nvim-neotest/neotest-jest" },
     opts = {
       adapters = {
