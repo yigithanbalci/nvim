@@ -68,44 +68,9 @@ map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting
 -- probably because formatting is too slow, not this mapping
 -- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
--- LazyVim v15.14.0 Defaults for Git  --
---#region
--- LazyGit
--- if vim.fn.executable("lazygit") == 1 then
---   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
---   map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
--- end
--- map("n", "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
--- map("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
--- map("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
--- map("n", "<leader>gl", function() Snacks.picker.git_log({ cwd = LazyVim.root.git() }) end, { desc = "Git Log" })
--- map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
--- map({"n", "x" }, "<leader>gY", function()
---   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
--- end, { desc = "Git Browse (copy)" })
---#endregion
-
--- Unbind LazyVim default git keymaps (replaced under <leader>gv below) --
---#region
-local del = vim.keymap.del
-local ok = pcall -- silently skip if keymap doesn't exist yet
-ok(del, "n", "<leader>gg")
-ok(del, "n", "<leader>gG")
-ok(del, "n", "<leader>gd")
-ok(del, "n", "<leader>gs")
-ok(del, "n", "<leader>gS")
-ok(del, "n", "<leader>gL")
-ok(del, "n", "<leader>gb")
-ok(del, "n", "<leader>gf")
-ok(del, "n", "<leader>gl")
-ok(del, "n", "<leader>gB")
-ok(del, "x", "<leader>gB")
-ok(del, "n", "<leader>gY")
-ok(del, "x", "<leader>gY")
---#endregion
-
 -- LazyVim v15.14.0 Defaults for Git (remapped under <leader>gv for Vanilla) --
 --#region
+--NOTE: Left git commits in fzf-lua and git-explorer in neotree for now 
 -- LazyGit
 if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gvg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
