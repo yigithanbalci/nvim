@@ -91,6 +91,9 @@ local del = vim.keymap.del
 local ok = pcall -- silently skip if keymap doesn't exist yet
 ok(del, "n", "<leader>gg")
 ok(del, "n", "<leader>gG")
+ok(del, "n", "<leader>gd")
+ok(del, "n", "<leader>gs")
+ok(del, "n", "<leader>gS")
 ok(del, "n", "<leader>gL")
 ok(del, "n", "<leader>gb")
 ok(del, "n", "<leader>gf")
@@ -108,6 +111,9 @@ if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gvg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
   map("n", "<leader>gvG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 end
+map("n", "<leader>gvd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (hunks)" })
+map("n", "<leader>gvs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+map("n", "<leader>gvS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
 map("n", "<leader>gvL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
 map("n", "<leader>gvb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
 map("n", "<leader>gvf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
