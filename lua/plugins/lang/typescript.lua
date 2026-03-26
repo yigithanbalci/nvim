@@ -4,13 +4,28 @@ end
 return {
   {
     "nvim-neotest/neotest",
-    commit = "b059824dc3c9422ccf6cfdbd7349df9f65389d39", -- Lock to the working version
+    commit = "7bef09d1170f8fb33c41607ca54f963cbdbf708d", -- Lock to version before treesitter subprocess refactor (db9fef98 breaks TS test discovery)
     dependencies = { "nvim-neotest/neotest-jest" },
     opts = {
       adapters = {
         ["neotest-jest"] = {
           jestCommand = "npm test --",
-          JestConfigFile = "custom.jest.config.ts",
+          jestConfigFile = function()
+            local file = vim.fn.expand("%:p")
+            for _, name in ipairs({
+              "jest.config.ts",
+              "jest.config.js",
+              "jest.config.mjs",
+              "jest.config.cjs",
+              "jest.config.json",
+            }) do
+              local found = vim.fs.find(name, { path = file, upward = true, stop = vim.uv.os_homedir() })[1]
+              if found then
+                return found
+              end
+            end
+            return vim.fn.getcwd() .. "/jest.config.js"
+          end,
         },
       },
     },
