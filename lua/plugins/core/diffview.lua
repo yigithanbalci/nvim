@@ -11,6 +11,11 @@ return {
     { "<leader>gfH", "<cmd>DiffviewFileHistory<cr>", desc = "Diffview File History (all)" },
   },
   opts = {
+    keymaps = {
+      view = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
+      file_panel = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
+      file_history_panel = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
+    },
     view = {
       default = {
         layout = "diff2_horizontal",
