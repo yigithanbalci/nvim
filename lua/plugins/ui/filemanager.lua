@@ -43,8 +43,8 @@ return {
         end,
         desc = "Open mini.files (cwd)",
       },
-      { "<leader>E", "<leader>fm", desc = "Open mini.files (Directory of Current File)", remap = true },
-      { "<leader>e", "<leader>fM", desc = "Open mini.files (cwd)", remap = true },
+      -- { "<leader>E", "<leader>fm", desc = "Open mini.files (Directory of Current File)", remap = true },
+      -- { "<leader>e", "<leader>fM", desc = "Open mini.files (cwd)", remap = true },
     },
   },
   {
@@ -64,10 +64,8 @@ return {
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      -- { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      -- { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
-      { "<leader>E", false },
-      { "<leader>e", false },
+      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
@@ -135,13 +133,36 @@ return {
       })
     end,
     keys = {
-      -- { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
+      {
+        "<leader>o",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "Oil Toggle Float",
+        remap = true,
+      },
+      {
+        "<leader>O",
+        function()
+          require("oil").open()()
+        end,
+        desc = "Explorer Oil (cwd)",
+        remap = true,
+      },
       {
         "<leader>fo",
         function()
           require("oil").toggle_float()
         end,
         desc = "Oil Toggle Float",
+        remap = true,
+      },
+      {
+        "<leader>fO",
+        function()
+          require("oil").open()()
+        end,
+        desc = "Explorer Oil (cwd)",
         remap = true,
       },
     },
