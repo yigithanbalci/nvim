@@ -10,6 +10,7 @@
 -- TypeScript - Auto-import, remove unused imports, and organize on save (before formatting)
 -- Uses buf_request_sync so each action completes before the next one starts
 -- and before BufWritePre returns (which triggers formatting)
+--TODO: make this work with any lsp?
 local function ts_lsp_action_sync(action, timeout)
   timeout = timeout or 3000
   local bufnr = vim.api.nvim_get_current_buf()
