@@ -4,7 +4,8 @@ return {
     opts = {
       plugins = { spelling = true },
       spec = {
-        ["<leader>h"] = { name = "+harpoon" },
+        { "<leader>h", group = "harpoon" },
+        { "<leader>gv", group = "vanilla (LazyVim Defaults)" },
       },
       preset = "modern",
     },

@@ -6,3 +6,6 @@ debug
 foo.*
 *.log
 data
+**/CLAUDE.local.md
+**/.claude/
+**/.DS_Store

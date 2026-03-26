@@ -67,3 +67,26 @@ map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting
 -- there is a problem while saving it inserts inputs
 -- probably because formatting is too slow, not this mapping
 -- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- LazyVim v15.14.0 Defaults for Git (remapped under <leader>gv for Vanilla) --
+--#region
+--NOTE: Left git commits in fzf-lua and git-explorer in neotree for now 
+-- LazyGit
+if vim.fn.executable("lazygit") == 1 then
+  map("n", "<leader>gu", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+  map("n", "<leader>gU", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+  map("n", "<leader>gvg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+  map("n", "<leader>gvG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+end
+map("n", "<leader>gvd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (hunks)" })
+map("n", "<leader>gvs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+map("n", "<leader>gvS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
+map("n", "<leader>gvL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
+map("n", "<leader>gvb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+map("n", "<leader>gvf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
+map("n", "<leader>gvl", function() Snacks.picker.git_log({ cwd = LazyVim.root.git() }) end, { desc = "Git Log" })
+map({ "n", "x" }, "<leader>gvB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map({ "n", "x" }, "<leader>gvY", function()
+  Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
+end, { desc = "Git Browse (copy)" })
+--#endregion

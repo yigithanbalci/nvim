@@ -75,8 +75,14 @@ vim.g.my_config = {
     avante = {
       enabled = false,
     },
-    copilot = {
+    claude_code = {
       enabled = true,
+    },
+    copilot = {
+      enabled = false,
+    },
+    _99 = {
+      enabled = false,
     },
   },
   extras = {
@@ -84,7 +90,12 @@ vim.g.my_config = {
     sonarlint = false,
   },
   git = {
+    diffview = true,
+    -- GitSigns is enabled and managed by LazyVim
+    -- but since event is LazyFile its shortcuts does not show on unmofied files
+    gitsigns = true,
     fugitive = false,
+    neogit = true,
   },
 }
 
@@ -154,6 +165,7 @@ function M.get_lazy_spec()
   end
 
   local ai_map = {
+    claude_code = "lazyvim.plugins.extras.ai.claudecode",
     copilot = "lazyvim.plugins.extras.ai.copilot",
     avante = "lazyvim.plugins.extras.ai.avante",
   }
