@@ -83,6 +83,10 @@ return {
     },
     opts = {
       window = {
+        --NOTE: position: left, right, top, bottom, float, current
+        --current Open within the current window, like netrw or vinegar would.
+        --left breaks other buffers, so, I made it float instead
+        position = "float",
         mappings = {
           ["l"] = { "open", nowait = true },
           ["L"] = "focus_preview",
