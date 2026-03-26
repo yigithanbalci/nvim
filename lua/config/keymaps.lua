@@ -73,6 +73,8 @@ map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting
 --NOTE: Left git commits in fzf-lua and git-explorer in neotree for now 
 -- LazyGit
 if vim.fn.executable("lazygit") == 1 then
+  map("n", "<leader>gu", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+  map("n", "<leader>gU", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
   map("n", "<leader>gvg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
   map("n", "<leader>gvG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 end
