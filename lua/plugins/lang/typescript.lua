@@ -20,29 +20,53 @@ return {
     opts = function(_, opts)
       local dap = require("dap")
       local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+      -- Find the nearest package.json directory from the current file,
+      -- so cwd resolves correctly in multi-module/monorepo projects.
+      local function get_project_root()
+        local buf_path = vim.fn.expand("%:p:h")
+        local root = vim.fs.find("package.json", { path = buf_path, upward = true })[1]
+        if root then
+          return vim.fn.fnamemodify(root, ":h")
+        end
+        return vim.fn.getcwd()
+      end
+
       local new_configs = {
         {
           type = "pwa-node",
           request = "launch",
-          name = "Debug",
-          args = { "${workspaceFolder}/src/main.ts" },
+          name = "Debug Current File",
+          program = "${file}",
           runtimeArgs = { "--nolazy", "-r", "ts-node/register", "-r", "tsconfig-paths/register" },
           sourceMaps = true,
-          cwd = "${workspaceFolder}",
-          protocol = "inspector",
+          cwd = get_project_root,
+          console = "integratedTerminal",
         },
         {
           type = "pwa-node",
           request = "launch",
-          name = "Debug Launch",
-          console = "integratedTerminal",
-          outDir = "${workspaceFolder}/dist/**.js",
-          program = "${workspaceFolder}/src/main.ts",
-          args = { "${workspaceFolder}/src/main.ts" },
+          name = "Debug Entry Point (src/main.ts)",
+          program = function()
+            local root = get_project_root()
+            local default = root .. "/src/main.ts"
+            return vim.fn.input("Entry point: ", default, "file")
+          end,
           runtimeArgs = { "--nolazy", "-r", "ts-node/register", "-r", "tsconfig-paths/register" },
           sourceMaps = true,
-          cwd = "${workspaceFolder}",
-          protocol = "auto",
+          resolveSourceMapLocations = { "${workspaceFolder}/**", "!**/node_modules/**" },
+          outFiles = { "${workspaceFolder}/dist/**/*.js" },
+          cwd = get_project_root,
+          console = "integratedTerminal",
+        },
+        {
+          type = "pwa-node",
+          request = "attach",
+          name = "Attach to Process",
+          processId = require("dap.utils").pick_process,
+          sourceMaps = true,
+          resolveSourceMapLocations = { "${workspaceFolder}/**", "!**/node_modules/**" },
+          cwd = get_project_root,
         },
         {
           type = "pwa-node",
@@ -53,8 +77,8 @@ return {
             "./node_modules/jest/bin/jest.js",
             "--runInBand",
           },
-          rootPath = "${workspaceFolder}",
-          cwd = "${workspaceFolder}",
+          rootPath = get_project_root,
+          cwd = get_project_root,
           console = "integratedTerminal",
           internalConsoleOptions = "neverOpen",
         },
