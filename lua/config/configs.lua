@@ -90,6 +90,7 @@ vim.g.my_config = {
     sonarlint = false,
   },
   git = {
+    diffview = true,
     fugitive = false,
   },
 }
