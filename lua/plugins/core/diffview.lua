@@ -10,5 +10,25 @@ return {
     { "<leader>gfh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview File History (current)" },
     { "<leader>gfH", "<cmd>DiffviewFileHistory<cr>", desc = "Diffview File History (all)" },
   },
-  opts = {},
+  opts = {
+    view = {
+      default = {
+        layout = "diff2_horizontal",
+        winbar_info = true,
+      },
+      merge_tool = {
+        layout = "diff3_horizontal",
+      },
+      file_history = {
+        layout = "diff2_horizontal",
+      },
+    },
+    file_panel = {
+      listing_style = "list",
+      win_config = {
+        position = "bottom",
+        height = 10,
+      },
+    },
+  },
 }
