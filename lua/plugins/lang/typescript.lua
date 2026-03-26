@@ -10,8 +10,7 @@ return {
       adapters = {
         ["neotest-jest"] = {
           jestCommand = "npm test --",
-          jestConfigFile = function()
-            local file = vim.fn.expand("%:p")
+          jestConfigFile = function(file)
             for _, name in ipairs({
               "jest.config.ts",
               "jest.config.js",
@@ -93,7 +92,6 @@ return {
             "./node_modules/jest/bin/jest.js",
             "--runInBand",
           },
-          rootPath = get_project_root,
           cwd = get_project_root,
           console = "integratedTerminal",
           internalConsoleOptions = "neverOpen",
