@@ -43,8 +43,8 @@ return {
         end,
         desc = "Open mini.files (cwd)",
       },
-      { "<leader>E", "<leader>fm", desc = "Open mini.files (Directory of Current File)", remap = true },
-      { "<leader>e", "<leader>fM", desc = "Open mini.files (cwd)", remap = true },
+      -- { "<leader>E", "<leader>fm", desc = "Open mini.files (Directory of Current File)", remap = true },
+      -- { "<leader>e", "<leader>fM", desc = "Open mini.files (cwd)", remap = true },
     },
   },
   {
@@ -64,10 +64,8 @@ return {
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      -- { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      -- { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
-      { "<leader>E", false },
-      { "<leader>e", false },
+      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
@@ -85,10 +83,23 @@ return {
     },
     opts = {
       window = {
+        --NOTE: position: left, right, top, bottom, float, current
+        --current Open within the current window, like netrw or vinegar would.
+        --left breaks other buffers, so, I made it float instead
+        position = "float",
         mappings = {
-          ["l"] = "open",
+          ["l"] = { "open", nowait = true },
           ["L"] = "focus_preview",
           ["h"] = "close_node",
+        },
+      },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline", "neo-tree" },
+      event_handlers = {
+        {
+          event = "file_opened",
+          handler = function()
+            require("neo-tree.command").execute({ action = "focus" })
+          end,
         },
       },
       filesystem = {
@@ -135,13 +146,36 @@ return {
       })
     end,
     keys = {
-      -- { "<leader>o", ":Oil<CR>", desc = "Explorer Oil (cwd)", remap = true },
+      {
+        "<leader>o",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "Oil Toggle Float",
+        remap = true,
+      },
+      {
+        "<leader>O",
+        function()
+          require("oil").open()()
+        end,
+        desc = "Explorer Oil (cwd)",
+        remap = true,
+      },
       {
         "<leader>fo",
         function()
           require("oil").toggle_float()
         end,
         desc = "Oil Toggle Float",
+        remap = true,
+      },
+      {
+        "<leader>fO",
+        function()
+          require("oil").open()()
+        end,
+        desc = "Explorer Oil (cwd)",
         remap = true,
       },
     },

@@ -30,6 +30,8 @@ elseif vim.g.my_config.search == "fzf-lua" then
       -- end,
       keys = {
         { "<leader><space>", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+        { "<leader>gd", false }, -- Disable LazyVim's fzf-lua Git Diff so diffview.nvim owns <leader>gd
+        { "<leader>gD", false }, -- Disable LazyVim's fzf-lua Git Diff so diffview.nvim owns <leader>gD
       },
     },
   }

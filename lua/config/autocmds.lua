@@ -7,39 +7,63 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- TypeScript - Remove unused imports on save
--- TODO: if there will be an E Z solution for format imports for any language
--- change this later on
+-- TypeScript - Auto-import, remove unused imports, and organize on save (before formatting)
+-- Uses buf_request_sync so each action completes before the next one starts
+-- and before BufWritePre returns (which triggers formatting)
+--TODO: make this work with any lsp?
+local function ts_lsp_action_sync(action, timeout)
+  timeout = timeout or 3000
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = "vtsls" })
+  if #clients == 0 then
+    clients = vim.lsp.get_clients({ bufnr = bufnr, name = "ts_ls" })
+  end
+  if #clients == 0 then
+    return
+  end
+
+  local client = clients[1]
+  ---@type lsp.CodeActionParams
+  local params = {
+    textDocument = vim.lsp.util.make_text_document_params(bufnr),
+    range = vim.lsp.util.make_range_params(0, client.offset_encoding).range,
+    context = {
+      only = { action },
+      diagnostics = {},
+    },
+  }
+
+  local results = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params, timeout)
+  if not results then
+    return
+  end
+
+  for _, res in pairs(results) do
+    for _, r in pairs(res.result or {}) do
+      -- Some LSP servers return actions that need resolving first
+      if not r.edit and not r.command and client:supports_method("codeAction/resolve") then
+        r = client:request_sync("codeAction/resolve", r, timeout, bufnr)
+        r = r and r.result
+        if not r then
+          goto continue
+        end
+      end
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
+      end
+      if r.command then
+        client:exec_cmd(r.command, { bufnr = bufnr })
+      end
+      ::continue::
+    end
+  end
+end
+
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = vim.api.nvim_create_augroup("ts_imports", { clear = true }),
-  pattern = { "*.tsx,*.ts" },
+  pattern = { "*.tsx", "*.ts" },
   callback = function()
-    -- vim.lsp.buf.code_action({
-    --   apply = true,
-    --   context = {
-    --     only = {
-    --       "source.removeUnusedImports",
-    --     },
-    --     diagnostics = {},
-    --   },
-    -- })
-    vim.lsp.buf.code_action({
-      apply = true,
-      context = {
-        only = {
-          "source.addMissingImports.ts",
-        },
-        diagnostics = {},
-      },
-    })
-    -- vim.lsp.buf.code_action({
-    --   apply = true,
-    --   context = {
-    --     only = {
-    --       "source.organizeImports",
-    --     },
-    --     diagnostics = {},
-    --   },
-    -- })
+    ts_lsp_action_sync("source.addMissingImports.ts")
+    ts_lsp_action_sync("source.organizeImports")
   end,
 })

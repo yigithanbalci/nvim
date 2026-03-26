@@ -90,7 +90,12 @@ vim.g.my_config = {
     sonarlint = false,
   },
   git = {
+    diffview = true,
+    -- GitSigns is enabled and managed by LazyVim
+    -- but since event is LazyFile its shortcuts does not show on unmofied files
+    gitsigns = true,
     fugitive = false,
+    neogit = true,
   },
 }
 
