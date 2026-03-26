@@ -95,6 +95,7 @@ vim.g.my_config = {
     -- but since event is LazyFile its shortcuts does not show on unmofied files
     gitsigns = true,
     fugitive = false,
+    neogit = true,
   },
 }
 
