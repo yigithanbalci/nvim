@@ -84,9 +84,18 @@ return {
     opts = {
       window = {
         mappings = {
-          ["l"] = "open",
+          ["l"] = { "open", nowait = true },
           ["L"] = "focus_preview",
           ["h"] = "close_node",
+        },
+      },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline", "neo-tree" },
+      event_handlers = {
+        {
+          event = "file_opened",
+          handler = function()
+            require("neo-tree.command").execute({ action = "focus" })
+          end,
         },
       },
       filesystem = {
