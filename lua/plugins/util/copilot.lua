@@ -1,4 +1,4 @@
-if not vim.g.my_config.ai.copilot.enabled then
+if not _G.yeet.plugins.ai.copilot.enabled then
   return {}
 end
 return {

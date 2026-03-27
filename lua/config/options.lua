@@ -127,3 +127,7 @@ end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- My configs table that will be used a lot of places
+_G.yeet = _G.yeet or {}
+_G.yeet.search = "fzf-lua"

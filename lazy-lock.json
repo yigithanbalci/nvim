@@ -70,6 +70,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "e3c18ddd27a853f85a6f513a864cf4f2982b9f26" },
   "rustaceanvim": { "branch": "master", "commit": "b25d186481624964523fee34f44c529b101c7435" },
   "snacks.nvim": { "branch": "main", "commit": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e" },
+  "sonarlint.nvim": { "branch": "main", "commit": "acd09b78969ddc965a7ddf59abb9d9eec5ecd94f" },
   "spring-boot.nvim": { "branch": "main", "commit": "5d206bdfeb0865ea97bfbc18f9e08e2f26ac4707" },
   "themery.nvim": { "branch": "main", "commit": "bfa58f4b279d21cb515b28023e1b68ec908584b2" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },

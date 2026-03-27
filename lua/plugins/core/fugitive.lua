@@ -1,4 +1,4 @@
-if not vim.g.my_config.git.fugitive then
+if not _G.yeet.plugins.git.fugitive.enabled then
   return {}
 end
 return {
