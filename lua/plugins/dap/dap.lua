@@ -1,3 +1,6 @@
+-- TODO yigithanbalci 2026-03-27: Search those two issues if fixable:
+-- when :q only open buffer except dap-ui, does not exit from nvim
+-- when do dap-ui switch mode opens dap-ui because of close-open structure
 local is_minimal = _G.yeet.plugins.dap.is_minimal
 local default_layouts = nil
 local saved_element_buffers = nil
@@ -109,3 +112,4 @@ return {
     },
   },
 }
+
