@@ -12,6 +12,9 @@ local cfg = {
     mini_surround = { enabled = true },
     neogen = { enabled = true },
   },
+  dap = {
+    is_minimal = true,
+  },
   editor = { mini_files = { enabled = true } },
   extras = { leetcode = { enabled = true }, sonarlint = { enabled = true } },
   formatters = { prettier = { enabled = true } },
