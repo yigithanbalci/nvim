@@ -1,4 +1,4 @@
-if not vim.g.my_config.extras.leetcode then
+if not _G.yeet.plugins.extras.leetcode.enabled then
   return {}
 end
 return {

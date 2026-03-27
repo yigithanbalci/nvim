@@ -1,3 +1,6 @@
+if not _G.yeet.plugins.coding.neogen.enabled then
+  return {}
+end
 return {
   {
     "danymat/neogen",

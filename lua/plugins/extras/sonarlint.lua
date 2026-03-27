@@ -1,4 +1,4 @@
-if not vim.g.my_config.extras.sonarlint then
+if not _G.yeet.plugins.extras.sonarlint.enabled then
   return {}
 end
 return {

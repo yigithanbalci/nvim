@@ -1,4 +1,4 @@
-if not vim.g.my_config.ai._99.enabled then
+if not _G.yeet.plugins.ai._99.enabled then
   return {}
 end
 return {

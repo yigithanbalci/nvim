@@ -1,4 +1,4 @@
-if not vim.g.my_config.git.diffview then
+if not _G.yeet.plugins.git.diffview.enabled then
   return {}
 end
 return {

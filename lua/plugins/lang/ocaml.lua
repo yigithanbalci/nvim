@@ -1,4 +1,4 @@
-if not vim.g.my_config.langs.ocaml.enabled then
+if not _G.yeet.plugins.langs.ocaml.enabled then
   return {}
 end
 return {

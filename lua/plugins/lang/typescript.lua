@@ -1,4 +1,4 @@
-if not vim.g.my_config.langs.typescript.enabled then
+if not _G.yeet.plugins.langs.typescript.enabled then
   return {}
 end
 return {

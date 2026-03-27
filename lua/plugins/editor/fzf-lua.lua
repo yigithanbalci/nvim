@@ -1,6 +1,6 @@
-if vim.g.my_config.search == "telescope" then
+if _G.yeet.plugins.search == "telescope" then
   return {}
-elseif vim.g.my_config.search == "fzf-lua" then
+elseif _G.yeet.plugins.search == "fzf-lua" then
   return {
     --NOTE: I am using default setting of lazyvim except a couple of keybindings
     {
