@@ -1,3 +1,6 @@
+if not _G.yeet.plugins.coding.blink.enabled then
+  return {}
+end
 return {
   {
     "saghen/blink.cmp",

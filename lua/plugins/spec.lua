@@ -72,7 +72,11 @@ function M.get_lazy_spec()
 
   -- Final static imports
   vim.list_extend(spec, {
+    { import = "plugins/ai" },
+    { import = "plugins/coding" },
     { import = "plugins/core" },
+    { import = "plugins/dap" },
+    { import = "plugins/editor" },
     { import = "plugins/extras" },
     { import = "plugins/lang" },
     { import = "plugins/ui" },

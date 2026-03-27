@@ -1,3 +1,6 @@
+if not _G.yeet.plugins.ai.claude_code.enabled then
+  return {}
+end
 return {
   "coder/claudecode.nvim",
   opts = {

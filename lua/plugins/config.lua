@@ -10,6 +10,7 @@ local cfg = {
     blink = { enabled = true },
     luasnip = { enabled = true },
     mini_surround = { enabled = true },
+    neogen = { enabled = true },
   },
   editor = { mini_files = { enabled = true } },
   extras = { leetcode = { enabled = true }, sonarlint = { enabled = true } },
