@@ -1,7 +1,7 @@
 --NOTE: Flutter is not supported by LazuVim directly for now
-if not vim.g.my_config.langs.flutter.enabled then
+if not _G.yeet.plugins.langs.flutter.enabled then
   return {}
-elseif vim.g.my_config.langs.flutter.config == "flutter-tools" then
+elseif _G.yeet.plugins.langs.flutter.config == "flutter-tools" then
   return {
     {
       "nvim-flutter/flutter-tools.nvim",

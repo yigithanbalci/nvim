@@ -1,15 +1,30 @@
-if not vim.g.my_config.langs.typescript.enabled then
+if not _G.yeet.plugins.langs.typescript.enabled then
   return {}
 end
 return {
   {
     "nvim-neotest/neotest",
+    commit = "7bef09d1170f8fb33c41607ca54f963cbdbf708d", -- Lock to version before treesitter subprocess refactor (db9fef98 breaks TS test discovery)
     dependencies = { "nvim-neotest/neotest-jest" },
     opts = {
       adapters = {
         ["neotest-jest"] = {
           jestCommand = "npm test --",
-          JestConfigFile = "custom.jest.config.ts",
+          jestConfigFile = function(file)
+            for _, name in ipairs({
+              "jest.config.ts",
+              "jest.config.js",
+              "jest.config.mjs",
+              "jest.config.cjs",
+              "jest.config.json",
+            }) do
+              local found = vim.fs.find(name, { path = file, upward = true, stop = vim.uv.os_homedir() })[1]
+              if found then
+                return found
+              end
+            end
+            return vim.fn.getcwd() .. "/jest.config.js"
+          end,
         },
       },
     },
@@ -77,7 +92,6 @@ return {
             "./node_modules/jest/bin/jest.js",
             "--runInBand",
           },
-          rootPath = get_project_root,
           cwd = get_project_root,
           console = "integratedTerminal",
           internalConsoleOptions = "neverOpen",

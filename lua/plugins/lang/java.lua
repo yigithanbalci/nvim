@@ -1,4 +1,4 @@
-if not vim.g.my_config.langs.java.enabled then
+if not _G.yeet.plugins.langs.java.enabled then
   return {}
 end
 -- This is the same as in lspconfig.configs.jdtls, but avoids
