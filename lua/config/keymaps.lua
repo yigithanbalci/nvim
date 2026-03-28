@@ -90,3 +90,7 @@ map({ "n", "x" }, "<leader>gvY", function()
   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
 end, { desc = "Git Browse (copy)" })
 --#endregion
+
+--NOTE: put it here for reminding, probably never gonna use 
+--and overriden by neotree. 
+--map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
