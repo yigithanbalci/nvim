@@ -61,6 +61,37 @@ map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)
 --   end
 -- end
 
+-- NOTE: File Explorer mappings (single source of truth)
+-- Controlled by _G.yeet.plugins.editor.file_explorer in plugins/config.lua
+-- Default is snacks.explorer. Overridden when neo-tree, mini_files, or oil is selected.
+-- Each plugin still keeps its own direct-access keys (e.g. <leader>fn, <leader>fm, <leader>fo).
+local file_explorer = _G.yeet.plugins.editor.file_explorer or "snacks"
+local explorer_actions = {
+  snacks = {
+    cwd = function() Snacks.explorer() end,
+    root = function() Snacks.explorer({ cwd = LazyVim.root() }) end,
+  },
+  ["neo-tree"] = {
+    cwd = function() require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() }) end,
+    root = function() require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() }) end,
+  },
+  mini_files = {
+    cwd = function() require("mini.files").open(vim.uv.cwd(), true) end,
+    root = function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end,
+  },
+  oil = {
+    cwd = function() require("oil").toggle_float() end,
+    root = function() require("oil").open() end,
+  },
+}
+local actions = explorer_actions[file_explorer]
+if actions then
+  map("n", "<leader>fe", actions.cwd, { desc = "File Explorer (cwd)" })
+  map("n", "<leader>fE", actions.root, { desc = "File Explorer (Root Dir)" })
+end
+map("n", "<leader>e", "<leader>fe", { desc = "File Explorer (cwd)", remap = true })
+map("n", "<leader>E", "<leader>fE", { desc = "File Explorer (Root Dir)", remap = true })
+
 --NOTE: Some fancy keymappings for not being able to remember them
 map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
 -- save file
@@ -90,3 +121,7 @@ map({ "n", "x" }, "<leader>gvY", function()
   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
 end, { desc = "Git Browse (copy)" })
 --#endregion
+
+--NOTE: put it here for reminding, probably never gonna use 
+--and overridden by neotree. 
+--map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })

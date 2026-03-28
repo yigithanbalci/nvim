@@ -5,6 +5,23 @@ end
 return {
   {
     "nvim-mini/mini.files",
+    init = function()
+      vim.api.nvim_create_user_command("MiniFiles", function(o)
+        local arg = o.args ~= "" and o.args or nil
+        local path
+        if arg == "cwd" then
+          path = vim.uv.cwd()
+        elseif arg == "root" then
+          path = LazyVim.root()
+        else
+          path = vim.api.nvim_buf_get_name(0)
+        end
+        require("mini.files").open(path, true)
+      end, {
+        nargs = "?",
+        complete = function() return { "cwd", "root" } end,
+      })
+    end,
     opts = {
       file = {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
@@ -49,21 +66,19 @@ return {
     },
     keys = {
       {
-        "<leader>fm",
+        "<leader>fM",
         function()
           require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
         end,
         desc = "Open mini.files (Directory of Current File)",
       },
       {
-        "<leader>fM",
+        "<leader>fm",
         function()
           require("mini.files").open(vim.uv.cwd(), true)
         end,
         desc = "Open mini.files (cwd)",
       },
-      -- { "<leader>E", "<leader>fm", desc = "Open mini.files (Directory of Current File)", remap = true },
-      -- { "<leader>e", "<leader>fM", desc = "Open mini.files (cwd)", remap = true },
     },
   },
 }

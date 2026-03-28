@@ -1,25 +1,26 @@
+if not _G.yeet.plugins.editor.neo_tree.enabled then
+  return {}
+end
 -- Neotree file manager
--- Lazuvim has this as default
+-- NOTE: neo-tree is enabled by LazyVim default, this file only adds custom overrides
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     keys = {
       {
-        "<leader>fE",
+        "<leader>fn",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
         end,
         desc = "Explorer NeoTree (Root Dir)",
       },
       {
-        "<leader>fe",
+        "<leader>fN",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (Root Dir)", remap = true },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
