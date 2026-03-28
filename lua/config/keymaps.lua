@@ -123,5 +123,5 @@ end, { desc = "Git Browse (copy)" })
 --#endregion
 
 --NOTE: put it here for reminding, probably never gonna use 
---and overriden by neotree. 
+--and overridden by neotree. 
 --map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
