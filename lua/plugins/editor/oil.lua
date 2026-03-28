@@ -2,33 +2,33 @@
 return {
   {
     "stevearc/oil.nvim",
+    cmd = { "Oil" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
+    opts = {
+      columns = { "icon" },
+      keymaps = {
+        ["<C-h>"] = false,
+        ["<C-l>"] = false,
+        ["<C-k>"] = false,
+        ["<C-j>"] = false,
+        ["<BS>"] = { "actions.parent", mode = "n" },
+        ["<M-h>"] = "actions.select_split",
+        ["q"] = "actions.close",
+      },
+      win_options = {
+        winbar = "%{v:lua.CustomOilBar()}",
+      },
+      view_options = {
+        show_hidden = true,
+      },
+    },
+    config = function(_, opts)
       CustomOilBar = function()
         local path = vim.fn.expand("%")
         path = path:gsub("oil://", "")
-
         return "  " .. vim.fn.fnamemodify(path, ":.")
       end
-
-      require("oil").setup({
-        columns = { "icon" },
-        keymaps = {
-          ["<C-h>"] = false,
-          ["<C-l>"] = false,
-          ["<C-k>"] = false,
-          ["<C-j>"] = false,
-          ["<BS>"] = { "actions.parent", mode = "n" },
-          ["<M-h>"] = "actions.select_split",
-          ["q"] = "actions.close",
-        },
-        win_options = {
-          winbar = "%{v:lua.CustomOilBar()}",
-        },
-        view_options = {
-          show_hidden = true,
-        },
-      })
+      require("oil").setup(opts)
     end,
     keys = {
       {
