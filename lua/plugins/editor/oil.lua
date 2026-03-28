@@ -32,22 +32,6 @@ return {
     end,
     keys = {
       {
-        "<leader>o",
-        function()
-          require("oil").toggle_float()
-        end,
-        desc = "Oil Toggle Float",
-        remap = true,
-      },
-      {
-        "<leader>O",
-        function()
-          require("oil").open()()
-        end,
-        desc = "Explorer Oil (cwd)",
-        remap = true,
-      },
-      {
         "<leader>fo",
         function()
           require("oil").toggle_float()
