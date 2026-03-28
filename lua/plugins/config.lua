@@ -19,7 +19,10 @@ local cfg = {
     -- Default file explorer for <leader>fe / <leader>fE
     -- Options: "snacks" | "neo-tree" | "mini_files" | "oil"
     file_explorer = "neo-tree",
+    -- NOTE: neo-tree is enabled by LazyVim default, this flag controls custom overrides
+    neo_tree = { enabled = true },
     mini_files = { enabled = true },
+    oil = { enabled = true },
   },
   extras = { leetcode = { enabled = true }, sonarlint = { enabled = true } },
   formatters = { prettier = { enabled = true } },

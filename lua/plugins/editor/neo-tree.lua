@@ -1,5 +1,8 @@
+if not _G.yeet.plugins.editor.neo_tree.enabled then
+  return {}
+end
 -- Neotree file manager
--- Lazuvim has this as default
+-- NOTE: neo-tree is enabled by LazyVim default, this file only adds custom overrides
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",

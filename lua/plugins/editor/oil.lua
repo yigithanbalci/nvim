@@ -1,3 +1,6 @@
+if not _G.yeet.plugins.editor.oil.enabled then
+  return {}
+end
 -- Oil file manager
 return {
   {
