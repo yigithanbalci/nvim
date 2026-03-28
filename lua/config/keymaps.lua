@@ -62,8 +62,33 @@ map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)
 -- end
 
 -- NOTE: File Explorer mappings (single source of truth)
--- Default <leader>fe is snacks.explorer, but it gets overridden
--- if neo-tree or another file manager plugin is activated.
+-- Controlled by _G.yeet.plugins.editor.file_explorer in plugins/config.lua
+-- Default is snacks.explorer. Overridden when neo-tree, mini_files, or oil is selected.
+-- Each plugin still keeps its own direct-access keys (e.g. <leader>fn, <leader>fm, <leader>fo).
+local file_explorer = _G.yeet.plugins.editor.file_explorer or "snacks"
+local explorer_actions = {
+  snacks = {
+    cwd = function() Snacks.explorer() end,
+    root = function() Snacks.explorer({ cwd = LazyVim.root() }) end,
+  },
+  ["neo-tree"] = {
+    cwd = function() require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() }) end,
+    root = function() require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() }) end,
+  },
+  mini_files = {
+    cwd = function() require("mini.files").open(vim.uv.cwd(), true) end,
+    root = function() require("mini.files").open(vim.api.nvim_buf_get_name(0), true) end,
+  },
+  oil = {
+    cwd = function() require("oil").toggle_float() end,
+    root = function() require("oil").open() end,
+  },
+}
+local actions = explorer_actions[file_explorer]
+if actions then
+  map("n", "<leader>fe", actions.cwd, { desc = "File Explorer (cwd)" })
+  map("n", "<leader>fE", actions.root, { desc = "File Explorer (Root Dir)" })
+end
 map("n", "<leader>e", "<leader>fe", { desc = "File Explorer (cwd)", remap = true })
 map("n", "<leader>E", "<leader>fE", { desc = "File Explorer (Root Dir)", remap = true })
 

@@ -15,7 +15,12 @@ local cfg = {
   dap = {
     is_minimal = true,
   },
-  editor = { mini_files = { enabled = true } },
+  editor = {
+    -- Default file explorer for <leader>fe / <leader>fE
+    -- Options: "snacks" | "neo-tree" | "mini_files" | "oil"
+    file_explorer = "neo-tree",
+    mini_files = { enabled = true },
+  },
   extras = { leetcode = { enabled = true }, sonarlint = { enabled = true } },
   formatters = { prettier = { enabled = true } },
   git = {
