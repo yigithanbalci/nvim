@@ -3,6 +3,12 @@ return {
   {
     "stevearc/oil.nvim",
     cmd = { "Oil" },
+    init = function()
+      vim.api.nvim_create_user_command("OilFloat", function()
+        -- Triggers lazy-load via :Oil, then opens float
+        vim.cmd("Oil --float")
+      end, {})
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       columns = { "icon" },
