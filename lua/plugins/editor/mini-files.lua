@@ -62,8 +62,6 @@ return {
         end,
         desc = "Open mini.files (cwd)",
       },
-      -- { "<leader>E", "<leader>fM", desc = "Open mini.files (Directory of Current File)", remap = true },
-      -- { "<leader>e", "<leader>fm", desc = "Open mini.files (cwd)", remap = true },
     },
   },
 }

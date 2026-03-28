@@ -61,6 +61,12 @@ map("n", "_", ":horizontal resize -2<CR>", { desc = "Horizontal resize window(-)
 --   end
 -- end
 
+-- NOTE: File Explorer mappings (single source of truth)
+-- Default <leader>fe is snacks.explorer, but it gets overridden
+-- if neo-tree or another file manager plugin is activated.
+map("n", "<leader>e", "<leader>fe", { desc = "File Explorer (cwd)", remap = true })
+map("n", "<leader>E", "<leader>fE", { desc = "File Explorer (Root Dir)", remap = true })
+
 --NOTE: Some fancy keymappings for not being able to remember them
 map("n", "<leader>fs", "<cmd>noautocmd w<cr>", { desc = "Save without formatting" })
 -- save file
