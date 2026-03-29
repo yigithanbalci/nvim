@@ -58,7 +58,7 @@ Custom snippets live in `snippets/` (JSON format — `flutter.json`, `package.js
 
 ## Key conventions
 
-- Picker and completion engine are set to `"auto"` in options.lua (resolved by LazyVim based on enabled extras); fzf-lua and blink.cmp are the enabled extras
+- Picker and completion engine are set to fzf-lua by lazyvim, also there is config directly in this repo
 - File explorer is configurable via `_G.yeet.plugins.editor.file_explorer` in `config.lua` (options: `"snacks"`, `"neo-tree"`, `"mini_files"`, `"oil"`)
 - System clipboard is intentionally separated — use `cy`/`cp` keymaps for clipboard yank/paste
 - VSCode compatibility: `init.lua` sets `vim.g.vscode = true` when running inside VSCode

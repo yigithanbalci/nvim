@@ -1,6 +1,6 @@
-if _G.yeet.plugins.search == "telescope" then
+if _G.yeet.search == "telescope" then
   return {}
-elseif _G.yeet.plugins.search == "fzf-lua" then
+elseif _G.yeet.search == "fzf-lua" then
   return {
     -- TODO yigithanbalci 2026-03-29: Add multiline match for grep
     {
