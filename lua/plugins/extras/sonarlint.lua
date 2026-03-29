@@ -27,6 +27,25 @@ local lang_map = {
   },
 }
 
+--- Resolve nvm default node bin directory, ignoring any `nvm use` override.
+--- The JS analyzer in sonarlint-language-server spawns node as a subprocess
+--- and requires an LTS version (18/20/22). This ensures the server always
+--- finds a compatible node regardless of the shell's active nvm version.
+local function get_nvm_default_node_bin()
+  local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. "/.nvm")
+  local ok, lines = pcall(vim.fn.readfile, nvm_dir .. "/alias/default")
+  if ok and #lines > 0 then
+    local major = lines[1]:match("^(%d+)")
+    if major then
+      local matches = vim.fn.glob(nvm_dir .. "/versions/node/v" .. major .. ".*/bin", true, true)
+      if #matches > 0 then
+        return matches[#matches]
+      end
+    end
+  end
+  return nil
+end
+
 local function build_sonarlint_config()
   local analyzers = {}
   local filetypes = {}
@@ -81,26 +100,24 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       local cmd, filetypes = build_sonarlint_config()
+
+      -- Override PATH for the server process so the JS analyzer always finds an LTS node
+      local cmd_env = nil
+      local node_bin = get_nvm_default_node_bin()
+      if node_bin then
+        cmd_env = { PATH = node_bin .. ":" .. vim.env.PATH }
+      end
+
       require("sonarlint").setup({
         server = {
           cmd = cmd,
+          cmd_env = cmd_env,
         },
         filetypes = filetypes,
         settings = {
-          sonarlint = {
-            pathToNodeExecutable = (function()
-              -- SonarLint JS analyzer requires an LTS Node.js (18/20/22), not bleeding edge
-              local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. "/.nvm")
-              local nvm_node = vim.fn.glob(nvm_dir .. "/versions/node/v22.*/bin/node")
-              if nvm_node ~= "" then
-                return vim.split(nvm_node, "\n")[1]
-              end
-              return vim.fn.exepath("node")
-            end)(),
-          },
+          sonarlint = {},
         },
       })
     end,
   },
 }
-
