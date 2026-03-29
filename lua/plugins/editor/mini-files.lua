@@ -19,7 +19,9 @@ return {
         require("mini.files").open(path, true)
       end, {
         nargs = "?",
-        complete = function() return { "cwd", "root" } end,
+        complete = function()
+          return { "cwd", "root" }
+        end,
       })
     end,
     opts = {
@@ -30,7 +32,7 @@ return {
         [".prettierrc"] = { glyph = "", hl = "MiniIconsPurple" },
         [".yarnrc.yml"] = { glyph = "", hl = "MiniIconsBlue" },
         ["eslint.config.js"] = { glyph = "󰱺", hl = "MiniIconsYellow" },
-        ["package.json"] = { glyph = "", hl = "MiniIconsGreen" },
+        ["package.json"] = { glyph = "", hl = "MiniIconsYellow" },
         ["tsconfig.json"] = { glyph = "", hl = "MiniIconsAzure" },
         ["tsconfig.build.json"] = { glyph = "", hl = "MiniIconsAzure" },
         ["yarn.lock"] = { glyph = "", hl = "MiniIconsBlue" },
