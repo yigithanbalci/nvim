@@ -87,9 +87,20 @@ return {
         },
         filetypes = filetypes,
         settings = {
-          sonarlint = {},
+          sonarlint = {
+            pathToNodeExecutable = (function()
+              -- SonarLint JS analyzer requires an LTS Node.js (18/20/22), not bleeding edge
+              local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. "/.nvm")
+              local nvm_node = vim.fn.glob(nvm_dir .. "/versions/node/v22.*/bin/node")
+              if nvm_node ~= "" then
+                return vim.split(nvm_node, "\n")[1]
+              end
+              return vim.fn.exepath("node")
+            end)(),
+          },
         },
       })
     end,
   },
 }
+
