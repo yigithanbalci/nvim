@@ -81,13 +81,21 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       local cmd, filetypes = build_sonarlint_config()
+
+      -- SonarLint requires Node 22+; resolve it from nvm regardless of the default alias.
+      local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. "/.nvm")
+      local node22_bins = vim.fn.glob(nvm_dir .. "/versions/node/v22.*/bin/node", true, true)
+      local node_path = #node22_bins > 0 and node22_bins[#node22_bins] or nil
+
       require("sonarlint").setup({
         server = {
           cmd = cmd,
         },
         filetypes = filetypes,
         settings = {
-          sonarlint = {},
+          sonarlint = {
+            pathToNodeExecutable = node_path,
+          },
         },
       })
     end,
