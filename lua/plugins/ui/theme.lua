@@ -1,3 +1,5 @@
+-- TODO yigithanbalci 2026-03-27: tidy up this some time
+
 -- Sets colors to line numbers Above, Current and Below  in this order
 function LineNumberColors()
   vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#51B3EC", bold = true })

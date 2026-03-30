@@ -21,25 +21,33 @@ Config: `stylua.toml` — 2-space indentation, 120 column width.
 
 ### Entry point and config loading
 
-`init.lua` → `lua/config/lazy.lua` → `lua/config/configs.lua`
+`init.lua` → `lua/config/lazy.lua` → `lua/plugins/spec.lua` + `lua/plugins/config.lua`
 
-The key architectural pattern is the **centralized feature-flag system** in `lua/config/configs.lua`. The `vim.g.my_config` table controls which languages, AI tools, linters, formatters, and extras are enabled. The `get_lazy_spec()` function reads these flags and dynamically builds the lazy.nvim plugin spec by mapping enabled features to their corresponding LazyVim extras. This means you toggle language support or tools by flipping booleans in `configs.lua`, not by adding/removing import statements.
+The key architectural pattern is the **centralized feature-flag system** split across two files:
+
+- `lua/plugins/config.lua` — Defines the `cfg` table with feature flags for AI tools, languages, formatters, linters, editor options, etc. Also exposes the config globally as `_G.yeet.plugins`.
+- `lua/plugins/spec.lua` — Contains `get_lazy_spec()` which reads the config flags and dynamically builds the lazy.nvim plugin spec by mapping enabled features to their corresponding LazyVim extras via a `MAPS` lookup table.
+
+You toggle language support or tools by flipping `{ enabled = true/false }` in `config.lua`, not by adding/removing import statements.
 
 ### Config files (`lua/config/`)
 
-- `configs.lua` — Feature flags and dynamic spec builder (described above)
-- `options.lua` — Vim options (leader = space, localleader = backslash, clipboard deliberately NOT synced with system)
-- `keymaps.lua` — Custom keymaps layered on top of LazyVim defaults
-- `autocmds.lua` — Custom autocommands (e.g., TypeScript auto-import on save)
+- `options.lua` — Vim options (leader = space, localleader = backslash, clipboard deliberately NOT synced with system). Also pins Node.js to the nvm default version and sets `_G.yeet.search` for the picker.
+- `keymaps.lua` — Custom keymaps layered on top of LazyVim defaults. Includes configurable file explorer keymaps driven by `_G.yeet.plugins.editor.file_explorer`.
+- `autocmds.lua` — Custom autocommands (TypeScript auto-import and organize-imports on save via vtsls/ts_ls)
 
 ### Plugin organization (`lua/plugins/`)
 
 Plugins are organized into subdirectories, all imported by `get_lazy_spec()`:
 
-- `core/` — Core editor plugins (snacks, which-key, fzf-lua, dap, fugitive)
+- `ai/` — AI tools (avante, copilot, claude-code, 99)
+- `coding/` — Completion and code generation (blink-cmp, neogen, mini-surround)
+- `core/` — Core editor plugins (whichkey, neogit, fugitive, diffview)
+- `dap/` — Debug adapter protocol configuration
+- `editor/` — File navigation and editing (harpoon, fzf-lua, snacks_picker, neo-tree, mini-files, oil, flash)
 - `lang/` — Language-specific overrides (go, java, typescript, flutter, ocaml, miscellaneous)
-- `ui/` — Visual plugins (theme, lualine, bufferline, file manager, twilight)
-- `util/` — Utility plugins (harpoon, undotree, copilot, avante, blink-cmp, mini, neogen, hardtime)
+- `ui/` — Visual plugins (theme, lualine, bufferline, snacks_dashboard, twilight, secret)
+- `util/` — Utility plugins (undotree, hardtime, lazydocker, todo-comments, csvview)
 - `extras/` — Optional extras (leetcode, sonarlint, qfedit)
 
 Each file in these directories returns a Lua table (or list of tables) following the lazy.nvim plugin spec format. These override or extend the base LazyVim plugin configurations.
@@ -50,7 +58,8 @@ Custom snippets live in `snippets/` (JSON format — `flutter.json`, `package.js
 
 ## Key conventions
 
-- The picker is fzf-lua (set in `configs.lua`, not telescope)
-- Completion engine is blink.cmp (not nvim-cmp)
+- Picker and completion engine are set to fzf-lua by lazyvim, also there is config directly in this repo
+- File explorer is configurable via `_G.yeet.plugins.editor.file_explorer` in `config.lua` (options: `"snacks"`, `"neo-tree"`, `"mini_files"`, `"oil"`)
 - System clipboard is intentionally separated — use `cy`/`cp` keymaps for clipboard yank/paste
 - VSCode compatibility: `init.lua` sets `vim.g.vscode = true` when running inside VSCode
+- Global namespace `_G.yeet` is used to share config state across files

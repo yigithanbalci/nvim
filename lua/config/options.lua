@@ -131,3 +131,17 @@ vim.g.markdown_recommended_style = 0
 -- My configs table that will be used a lot of places
 _G.yeet = _G.yeet or {}
 _G.yeet.search = "fzf-lua"
+
+-- Pin Node.js to nvm default so all plugins/LSPs use an LTS version,
+-- regardless of any `nvm use` done in the shell before launching nvim.
+local nvm_dir = vim.env.NVM_DIR or (vim.env.HOME .. "/.nvm")
+local ok, lines = pcall(vim.fn.readfile, nvm_dir .. "/alias/default")
+if ok and #lines > 0 then
+  local major = lines[1]:match("^(%d+)")
+  if major then
+    local matches = vim.fn.glob(nvm_dir .. "/versions/node/v" .. major .. ".*/bin", true, true)
+    if #matches > 0 then
+      vim.env.PATH = matches[#matches] .. ":" .. vim.env.PATH
+    end
+  end
+end

@@ -147,7 +147,8 @@ return {
                 end
                 local names = {}
                 for _, client in ipairs(clients) do
-                  table.insert(names, client.name)
+                  local name = client.name:gsub("%.nvim$", "")
+                  table.insert(names, name)
                 end
                 return " " .. table.concat(names, ", ")
               end,
@@ -159,11 +160,12 @@ return {
               --   return { fg = Snacks.util.color("Type") }
               -- end,
             },
-            {
-              function()
-                return " " .. os.date("%R")
-              end,
-            },
+            -- Date time is on OS bar and tmux bar as well no need
+            -- {
+            --   function()
+            --     return " " .. os.date("%R")
+            --   end,
+            -- },
           },
         },
         extensions = { "neo-tree", "lazy", "fzf" },
