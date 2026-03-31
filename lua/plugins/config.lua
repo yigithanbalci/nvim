@@ -6,8 +6,10 @@ local cfg = {
     copilot = { enabled = false },
     copilot_chat = { enabled = false },
     --NOTE: copilot-native works better with sidekick I assume
-    copilot_native = { enabled = true },
-    sidekick = { enabled = true },
+    -- TODO yigithanbalci 2026-03-31: tryout copilot native after nvim 0.12 update
+    -- it requires that
+    copilot_native = { enabled = false },
+    sidekick = { enabled = false },
     _99 = { enabled = false },
   },
   coding = {
