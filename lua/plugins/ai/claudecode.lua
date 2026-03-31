@@ -28,6 +28,16 @@ return {
       })
     end,
     keys = {
+      -- Nullify LazyVim claudecode extra defaults to avoid conflicts
+      { "<leader>af", false },
+      { "<leader>ar", false },
+      { "<leader>aC", false },
+      { "<leader>ab", false },
+      { "<leader>as", false },
+      -- NOTE: more convenient and I use that
+      -- { "<leader>aa", false },
+      { "<leader>ad", false },
+      -- Custom keybindings
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
       { "<leader>aC", "", desc = "+ClaudeCode", mode = { "n", "v" } },

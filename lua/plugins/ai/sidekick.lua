@@ -1,8 +1,19 @@
+if not _G.yeet.plugins.ai.sidekick.enabled then
+  return {}
+end
 return {
   {
     "folke/sidekick.nvim",
     -- stylua: ignore
     keys = {
+      -- Nullify LazyVim sidekick extra defaults to avoid conflicts
+      { "<leader>aa", false },
+      { "<leader>as", false },
+      { "<leader>ad", false },
+      { "<leader>at", false },
+      { "<leader>af", false },
+      { "<leader>av", false },
+      { "<leader>ap", false },
       -- nes is also useful in normal mode
       { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },

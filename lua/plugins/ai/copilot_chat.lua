@@ -6,6 +6,11 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     keys = {
+      -- Nullify LazyVim copilot-chat extra defaults to avoid conflicts
+      { "<leader>aa", false },
+      { "<leader>ax", false },
+      { "<leader>aq", false },
+      { "<leader>ap", false },
       { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
       { "<leader>a", "", desc = "+ai", mode = { "n", "x" } },
       {
