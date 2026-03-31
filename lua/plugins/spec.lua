@@ -4,9 +4,12 @@ local M = {}
 -- Local mapping table to store specs by category
 local MAPS = {
   ai = {
+    avante = "lazyvim.plugins.extras.ai.avante",
     claude_code = "lazyvim.plugins.extras.ai.claudecode",
     copilot = "lazyvim.plugins.extras.ai.copilot",
-    avante = "lazyvim.plugins.extras.ai.avante",
+    copilot_chat = "lazyvim.plugins.extras.ai.copilot-chat",
+    copilot_native = "lazyvim.plugins.extras.ai.copilot-native",
+    sidekick = "lazyvim.plugins.extras.ai.sidekick",
   },
   coding = {
     blink = "lazyvim.plugins.extras.coding.blink",

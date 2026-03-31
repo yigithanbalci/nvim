@@ -4,6 +4,10 @@ local cfg = {
     avante = { enabled = false },
     claude_code = { enabled = true },
     copilot = { enabled = false },
+    copilot_chat = { enabled = false },
+    --NOTE: copilot-native works better with sidekick I assume
+    copilot_native = { enabled = false },
+    sidekick = { enabled = true },
     _99 = { enabled = false },
   },
   coding = {
@@ -18,7 +22,7 @@ local cfg = {
   editor = {
     -- Default file explorer for <leader>fe / <leader>fE
     -- Options: "snacks" | "neo-tree" | "mini_files" | "oil"
-    file_explorer = "neo-tree",
+    file_explorer = "oil",
     -- NOTE: neo-tree is enabled by LazyVim default, this flag controls custom overrides
     neo_tree = { enabled = true },
     mini_files = { enabled = true },
