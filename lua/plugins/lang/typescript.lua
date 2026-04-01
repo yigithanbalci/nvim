@@ -4,7 +4,6 @@ end
 return {
   {
     "nvim-neotest/neotest",
-    commit = "7bef09d1170f8fb33c41607ca54f963cbdbf708d", -- Lock to version before treesitter subprocess refactor (db9fef98 breaks TS test discovery)
     dependencies = { "nvim-neotest/neotest-jest" },
     opts = {
       adapters = {
