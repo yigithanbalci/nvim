@@ -16,6 +16,7 @@ return {
     opts = {
       columns = { "icon" },
       keymaps = {
+        ["<C-s>"] = false,
         ["<C-h>"] = false,
         ["<C-l>"] = false,
         ["<C-k>"] = false,
