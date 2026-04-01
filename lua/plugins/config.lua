@@ -4,6 +4,10 @@ local cfg = {
     avante = { enabled = false },
     claude_code = { enabled = true },
     copilot = { enabled = false },
+    copilot_chat = { enabled = false },
+    --NOTE: copilot-native works better with sidekick I assume
+    copilot_native = { enabled = true },
+    sidekick = { enabled = true },
     _99 = { enabled = false },
   },
   coding = {
